@@ -73,7 +73,7 @@ public class User extends Entity {
         User user = (User) o;
         return Objects.equals(getCreationDate(), user.getCreationDate()) &&
                 Objects.equals(getId(), user.getId()) &&
-                Objects.equals(getEmail(), getEmail());
+                Objects.equals(getEmail(), user.getEmail());
     }
 
     @Override
