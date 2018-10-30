@@ -1,6 +1,5 @@
 package com.eventplatform.model;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,11 +13,11 @@ public class User extends Entity {
     private String email;
     private String password;
 
-    public User(BigInteger id, Date creationDate) {
+    public User(int id, Date creationDate) {
         super(id, creationDate);
     }
 
-    public User(BigInteger id, Date creationDate, String name, String surname, String login, String email, String password) {
+    public User(int id, Date creationDate, String name, String surname, String login, String email, String password) {
         super(id, creationDate);
         this.name = name;
         this.surname = surname;
@@ -72,16 +71,14 @@ public class User extends Entity {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getSurname(), user.getSurname()) &&
-                Objects.equals(getLogin(), user.getLogin()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPassword(), user.getPassword());
+        return Objects.equals(getCreationDate(), user.getCreationDate()) &&
+                Objects.equals(getId(), user.getId()) &&
+                Objects.equals(getEmail(), getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getLogin(), getEmail(), getPassword());
+        return Objects.hash(getId(), getCreationDate(), getName(), getSurname(), getLogin(), getEmail(), getPassword());
     }
 
     @Override

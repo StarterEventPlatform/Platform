@@ -1,22 +1,21 @@
 package com.eventplatform.model;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 public class Entity {
-    private BigInteger id;
+    private int id;
     private Date creationDate;
 
-    public Entity(BigInteger id, Date creationDate) {
+    public Entity(int id, Date creationDate) {
         this.id = id;
         this.creationDate = creationDate;
     }
 
-    public BigInteger getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -6,7 +6,6 @@ import com.eventplatform.util.PasswordEncoder;
 import com.eventplatform.util.UtilConstants;
 import com.eventplatform.util.container.UserContainer;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 public class Main {
@@ -15,13 +14,13 @@ public class Main {
         // test md5
         // System.out.println(PasswordEncoder.getInstance().encode("test", UtilConstants.ENCODE_MD5));
 
-
-        User test1 = new User(new BigInteger("0"), new Date(System.currentTimeMillis()), "name", "surname",
+        System.out.println("******************************MAIN***************************************");
+        User test1 = new User(0, new Date(System.currentTimeMillis()), "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
         User test2 = UserFactory.createUser(test1);
-        test2.setId(new BigInteger("1"));
+        test2.setId(0);
 
-        User test3 = UserFactory.createUser(new BigInteger("2"), "name", "surname",
+        User test3 = UserFactory.createUser(2, "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
 
 
@@ -42,6 +41,6 @@ public class Main {
             System.out.println(e.getClass().getName());
         }
 
-
+        System.out.println("**************************************************************************");
     }
 }

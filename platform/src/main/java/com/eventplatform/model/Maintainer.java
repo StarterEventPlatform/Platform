@@ -1,10 +1,9 @@
 package com.eventplatform.model;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 public class Maintainer extends Entity {
-    public Maintainer(BigInteger id, Date creationDate) {
+    public Maintainer(int id, Date creationDate) {
         super(id, creationDate);
     }
 }
