@@ -12,19 +12,27 @@ public class GeoPosition extends Entity {
         super(id, creationDate);
     }
 
-    public GeoPosition(int id, Date creationDate, float latitude,float longitude) {
-        super(id,creationDate);
+    public GeoPosition(int id, Date creationDate, float latitude, float longitude) {
+        super(id, creationDate);
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public float getLatitude() {return latitude;}
+    public float getLatitude() {
+        return latitude;
+    }
 
-    public void setLatitude(float latitude) {this.latitude = latitude;}
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
 
-    public float getLongitude() {return longitude;}
+    public float getLongitude() {
+        return longitude;
+    }
 
-    public void setLongitude(float longitude) {this.longitude = longitude;}
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -44,8 +52,8 @@ public class GeoPosition extends Entity {
     public String toString() {
         return "GeoPosition{" +
                 "id='" + super.getId() + '\'' +
-                ", latitude=" + latitude + '\''  +
-                ", longitude="+ longitude + '\'' +
+                ", latitude=" + latitude + '\'' +
+                ", longitude=" + longitude + '\'' +
                 ", creationDate=" + super.getCreationDate() +
                 '}';
     }
