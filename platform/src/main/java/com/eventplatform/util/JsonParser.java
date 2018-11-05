@@ -1,4 +1,4 @@
-
+package com.eventplatform.util;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -27,7 +27,7 @@ public class JsonParser {
      *
      *
      * */
-    // todo fdsgdhdhd
+    // todo return Map parsedJson
     public Map<String, String> getParsedJson(String json) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = null;
@@ -46,7 +46,7 @@ public class JsonParser {
         String nameValue = "";
         try {
             JsonNode jsonNode = mapper.readTree(json);
-            nameValue = jsonNode.get("name").asText();
+            nameValue = jsonNode.get(name).asText();
         } catch (IOException e) {
             e.printStackTrace();
         }
