@@ -21,7 +21,6 @@ import java.util.Map;
 /**
  * @author Gleb Durygin
  */
-
 public class XmlParser {
 
     private static XmlParser xmlParser = null;
@@ -35,7 +34,11 @@ public class XmlParser {
         return xmlParser;
     }
 
-    // todo return Map parsedXml
+    /**
+     * @param xmlString
+     * @return Map parsedXml
+     * @throws XmlParserException
+     */
     public Map<String, String> getParsedXml(String xmlString) throws XmlParserException {
         HashMap<String, String> map;
         map = new HashMap<String, String>();
@@ -50,7 +53,11 @@ public class XmlParser {
         return map;
     }
 
-    // todo return Document getDocumentFromString
+    /**
+     * @param xmlString
+     * @return Document document
+     * @throws XmlParserException
+     */
     public Document getDocumentFromString(String xmlString) throws XmlParserException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -63,7 +70,12 @@ public class XmlParser {
         }
     }
 
-    // todo return String getStringFromDocument
+    /**
+     * @param document
+     * @return String document
+     * @throws XmlParserException
+     * @throws TransformerException
+     */
     public String getStringFromDocument(Document document) throws XmlParserException, TransformerException {
         try (StringWriter stringWriter = new StringWriter()) {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -77,6 +89,10 @@ public class XmlParser {
         }
     }
 
+    /**
+     * @return Document document
+     * @throws XmlParserException
+     */
     public Document createDocument() throws XmlParserException {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -86,6 +102,13 @@ public class XmlParser {
         }
     }
 
+    /**
+     * @param document
+     * @param nodeName
+     * @param value
+     * @param attributes
+     * @return Node node
+     */
     public Node createNodeWithValueAndAttributes(Document document, String nodeName, String value, String[] attributes) {
         Element node = document.createElement(nodeName);
         node.appendChild(document.createTextNode(value));
@@ -94,6 +117,12 @@ public class XmlParser {
         return node;
     }
 
+    /**
+     * @param document
+     * @param nodeName
+     * @param value
+     * @param attributes
+     */
     public void addElementWithValueAndAttributesToDocument(Document document, String nodeName, String value, String[] attributes) {
         Element node = document.createElement(nodeName);
         node.appendChild(document.createTextNode(value));
@@ -102,21 +131,39 @@ public class XmlParser {
         document.appendChild(node);
     }
 
+    /**
+     * @param xml
+     * @param tagName
+     * @return NodeList nodeList
+     * @throws XmlParserException
+     */
     public NodeList getElementsByTagName(String xml, String tagName) throws XmlParserException {
         return getDocumentFromString(xml).getDocumentElement().getElementsByTagName(tagName);
     }
 
-    // todo return NamedMap Attributes
+    /**
+     * @param node
+     * @return NamedNodeMap namedNodeMap
+     */
     public NamedNodeMap getAttributes(Node node) {
         return node.getAttributes();
     }
 
+    /**
+     * @param node
+     * @param attributeName
+     * @return String attribute
+     */
     public String getAttribute(Node node, String attributeName) {
-
         return node.getAttributes().getNamedItem(attributeName).getNodeValue();
     }
 
-    // todo return String ValueByName
+    /**
+     * @param xml
+     * @param tagName
+     * @return String value
+     * @throws XmlParserException
+     */
     public String getValueByName(String xml, String tagName) throws XmlParserException {
         try {
             return getElementsByTagName(xml, tagName).item(0).getFirstChild().getNodeValue();
@@ -125,7 +172,12 @@ public class XmlParser {
         }
     }
 
-    // todo return Node get Node by tagname
+    /**
+     * @param xml
+     * @param tagName
+     * @return Node node
+     * @throws XmlParserException
+     */
     public Node getFirstNode(String xml, String tagName) throws XmlParserException {
         return getElementsByTagName(xml, tagName).item(0);
     }

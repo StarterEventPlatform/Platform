@@ -13,17 +13,17 @@ import static org.hamcrest.core.Is.is;
 public class JsonParserTest extends Assert {
     private Map<String, String> mapTest;
     private String nameValue = "lastName";
-    private String valueTest = "Иванов";
+    private String valueTest = "Tester";
     private JsonParser jsonParser;
     private String jsonTest = "{\n" +
-            "   \"firstName\": \"Иван\",\n" +
-            "   \"lastName\": \"Иванов\"}";
+            "   \"firstName\": \"Test\",\n" +
+            "   \"lastName\": \"Tester\"}";
 
     @Before
     public void init() {
         mapTest = new HashMap<>();
-        mapTest.put("firstName", "Иван");
-        mapTest.put("lastName", "Иванов");
+        mapTest.put("firstName", "Test");
+        mapTest.put("lastName", "Tester");
         jsonParser = JsonParser.getParserJson();
     }
 

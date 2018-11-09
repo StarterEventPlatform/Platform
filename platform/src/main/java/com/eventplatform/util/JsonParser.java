@@ -23,12 +23,11 @@ public class JsonParser {
 
     }
 
-    /*
-     * MAAP[KEY=NAMETAG,VALUE=MAP[KEY=ATTRIBUUTES||VALUE, VALUE = MAP [NAMEOFATTR OR NAME OF VALUE]]]
-     *
-     *
-     * */
-    // todo return Map parsedJson
+    /**
+     * @param json
+     * @return Map parsedJson
+     * @throws JsonParserException
+     */
     public Map<String, String> getParsedJson(String json) throws JsonParserException {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = null;
@@ -42,7 +41,12 @@ public class JsonParser {
         return map;
     }
 
-    // todo return String ValueByName
+    /**
+     * @param name
+     * @param json
+     * @return String value
+     * @throws JsonParserException
+     */
     public String getValueByName(String name, String json) throws JsonParserException {
         ObjectMapper mapper = new ObjectMapper();
         String nameValue = "";
@@ -56,5 +60,4 @@ public class JsonParser {
         }
         return nameValue;
     }
-
 }

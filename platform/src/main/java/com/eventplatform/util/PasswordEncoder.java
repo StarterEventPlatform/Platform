@@ -5,8 +5,6 @@ import com.eventplatform.exception.utils.PasswordEncoderException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
-// todo move to bean when we create web app and remove singleton
 public class PasswordEncoder {
 
     private static PasswordEncoder instance;
@@ -19,6 +17,12 @@ public class PasswordEncoder {
         return instance;
     }
 
+    /**
+     * @param password
+     * @param encodeType
+     * @return String hex
+     * @throws PasswordEncoderException
+     */
     public String encode(String password, String encodeType) throws PasswordEncoderException {
         try {
             MessageDigest md = MessageDigest.getInstance(encodeType);
@@ -36,5 +40,4 @@ public class PasswordEncoder {
             throw new PasswordEncoderException(UtilConstants.ENCODE_EX_MSG + encodeType);
         }
     }
-
 }
