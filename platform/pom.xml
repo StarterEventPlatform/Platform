@@ -15,6 +15,7 @@
         <jackson-core.version>2.9.7</jackson-core.version>
         <junit.version>4.8.1</junit.version>
         <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+        <jackson-dataformat-xml.version>2.9.7</jackson-dataformat-xml.version>
     </properties>
 
     <build>
@@ -53,6 +54,13 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>${jackson-mapper-asl.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson-dataformat-xml.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,5 +1,8 @@
 package com.eventplatform.tmp;
 
+import com.eventplatform.controller.Controller;
+import com.eventplatform.controller.ControllerAggregator;
+import com.eventplatform.controller.ControllerConstants;
 import com.eventplatform.factory.EventFactory;
 import com.eventplatform.factory.GeoPosistionFactory;
 import com.eventplatform.factory.MaintainerFactory;
@@ -8,6 +11,7 @@ import com.eventplatform.model.Event;
 import com.eventplatform.model.GeoPosition;
 import com.eventplatform.model.Maintainer;
 import com.eventplatform.model.User;
+import com.eventplatform.util.MarkupUtils;
 import com.eventplatform.util.PasswordEncoder;
 import com.eventplatform.util.UtilConstants;
 import com.eventplatform.util.container.UserContainer;
@@ -24,7 +28,7 @@ public class Main {
         System.out.println("************************TEST USER_FACTORY********************************");
         User test1 = new User(0, new Date(System.currentTimeMillis()), "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
-        User test2 = UserFactory.createUser(test1);
+        /*User test2 = UserFactory.createUser(test1);
         test2.setId(0);
 
         User test3 = UserFactory.createUser(2, "name", "surname",
@@ -86,6 +90,15 @@ public class Main {
         System.out.println("test10:" + test10);
         System.out.println("test11:" + test11);
         System.out.println("test12:" + test12);
+        System.out.println("**************************************************************************");
+*/
+        System.out.println("**********************TEST MARKUP_UTILS*****************************");
+        String json = MarkupUtils.getInstance().serialize(test1, UtilConstants.JSON_TYPE);
+        System.out.println("json: " + json);
+        System.out.println("xml: " + MarkupUtils.getInstance().serialize(test1, UtilConstants.XML_TYPE));
+        Controller c = ControllerAggregator.getInstance().getByType(ControllerConstants.USER_TYPE);
+        c.create(json);
+        System.out.println(c.getAll());
         System.out.println("**************************************************************************");
     }
 }

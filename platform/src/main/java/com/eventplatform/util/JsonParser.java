@@ -16,7 +16,7 @@ public class JsonParser {
 
     }
 
-    public static JsonParser getParserJson() {
+    public static JsonParser getJsonParser() {
         if (parserJson == null)
             parserJson = new JsonParser();
         return parserJson;

@@ -24,7 +24,7 @@ public class JsonParserTest extends Assert {
         mapTest = new HashMap<>();
         mapTest.put("firstName", "Test");
         mapTest.put("lastName", "Tester");
-        jsonParser = JsonParser.getParserJson();
+        jsonParser = JsonParser.getJsonParser();
     }
 
     @Test

@@ -17,4 +17,9 @@ public class UtilConstants {
             ERROR_TRANSFORM_DOCUMENT_TO_STRING = "Error! Can't transform Document to String",
             ERROR_CREATE_DOCUMENT = "Error! Create Document",
             ERROR_TRANSFORM_STRING_TO_DOCUMENT = "Error! Can't transform String to Document";
+
+    // Markup types
+    public static final String
+            JSON_TYPE = "JSON",
+            XML_TYPE = "XML";
 }
