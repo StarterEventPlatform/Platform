@@ -7,20 +7,11 @@ import com.eventplatform.model.User;
 
 import java.util.*;
 
-
-// todo move to bean
 public class UserContainer implements Container<User> {
-
     private Map<Integer, User> users;
-    private static UserContainer instance;
 
-    private UserContainer() {
+    public UserContainer() {
         users = new HashMap<>();
-    }
-
-    public static UserContainer getInstance() {
-        if (instance == null) instance = new UserContainer();
-        return instance;
     }
 
     @Override

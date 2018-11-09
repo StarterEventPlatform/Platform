@@ -35,7 +35,7 @@ public class Main {
         System.out.println("test2:" + test2);
         System.out.println("test3:" + test3);
 
-        UserContainer userContainer = UserContainer.getInstance();
+        UserContainer userContainer = new UserContainer();
         userContainer.addValue(0, test1);
         userContainer.addValue(1, test2);
         userContainer.addValue(2, test3);

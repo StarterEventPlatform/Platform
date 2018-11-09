@@ -9,16 +9,9 @@ import java.util.*;
 
 public class MaintainerContainer implements Container<Maintainer> {
     private Map<Integer, Maintainer> maintainerMap;
-    private static MaintainerContainer instance;
 
-    private MaintainerContainer() {
+    public MaintainerContainer() {
         maintainerMap = new HashMap<>();
-    }
-
-    public static MaintainerContainer getInstance() {
-        if (instance == null)
-            instance = new MaintainerContainer();
-        return instance;
     }
 
     @Override

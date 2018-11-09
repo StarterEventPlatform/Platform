@@ -9,16 +9,9 @@ import java.util.*;
 
 public class GeoPositionContainer implements Container<GeoPosition> {
     private Map<Integer, GeoPosition> geoPositionMap;
-    private static GeoPositionContainer instance;
 
-    private GeoPositionContainer() {
+    public GeoPositionContainer() {
         geoPositionMap = new HashMap<>();
-    }
-
-    public static GeoPositionContainer getInstance() {
-        if (instance == null)
-            instance = new GeoPositionContainer();
-        return instance;
     }
 
     @Override

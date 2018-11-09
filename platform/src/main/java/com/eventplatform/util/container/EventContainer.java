@@ -8,17 +8,10 @@ import com.eventplatform.model.Event;
 import java.util.*;
 
 public class EventContainer implements Container<Event> {
-
     private Map<Integer, Event> events;
-    private static EventContainer instance;
 
-    private EventContainer() {
+    public EventContainer() {
         events = new HashMap<>();
-    }
-
-    public static EventContainer getInstance() {
-        if (instance == null) instance = new EventContainer();
-        return instance;
     }
 
     @Override
