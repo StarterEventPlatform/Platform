@@ -1,6 +1,7 @@
 package com.eventplatform.controller;
 
-// todo the same like a com.eventplatform.model goal
-// todo move to bean
-public class Controller {
+public interface Controller<T> {
+    public T get(int id);
+
+    public void remove(int id);
 }
