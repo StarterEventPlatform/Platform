@@ -6,7 +6,6 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -41,7 +40,7 @@ public class XmlParser {
      */
     public Map<String, String> getParsedXml(String xmlString) throws XmlParserException {
         HashMap<String, String> map;
-        map = new HashMap<String, String>();
+        map = new HashMap<>();
         Document xml = getDocumentFromString(xmlString);
         Node user = xml.getFirstChild();
         NodeList childs = user.getChildNodes();
@@ -64,6 +63,7 @@ public class XmlParser {
         try {
             builder = factory.newDocumentBuilder();
             Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
+            doc.getDocumentElement().normalize();
             return doc;
         } catch (Exception e) {
             throw new XmlParserException(UtilConstants.ERROR_TRANSFORM_STRING_TO_DOCUMENT);
@@ -90,45 +90,15 @@ public class XmlParser {
     }
 
     /**
-     * @return Document document
-     * @throws XmlParserException
-     */
-    public Document createDocument() throws XmlParserException {
-        try {
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            return builder.newDocument();
-        } catch (ParserConfigurationException e) {
-            throw new XmlParserException(UtilConstants.ERROR_CREATE_DOCUMENT);
-        }
-    }
-
-    /**
      * @param document
      * @param nodeName
      * @param value
-     * @param attributes
      * @return Node node
      */
-    public Node createNodeWithValueAndAttributes(Document document, String nodeName, String value, String[] attributes) {
+    public Node createNodeWithValue(Document document, String nodeName, String value) {
         Element node = document.createElement(nodeName);
         node.appendChild(document.createTextNode(value));
-        for (int i = 0; i < attributes.length; i++)
-            node.appendChild(document.createAttribute(attributes[i]));
         return node;
-    }
-
-    /**
-     * @param document
-     * @param nodeName
-     * @param value
-     * @param attributes
-     */
-    public void addElementWithValueAndAttributesToDocument(Document document, String nodeName, String value, String[] attributes) {
-        Element node = document.createElement(nodeName);
-        node.appendChild(document.createTextNode(value));
-        for (int i = 0; i < attributes.length; i++)
-            node.appendChild(document.createAttribute(attributes[i]));
-        document.appendChild(node);
     }
 
     /**
