@@ -6,6 +6,7 @@ import com.eventplatform.model.Maintainer;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class EventFactory {
 
@@ -20,4 +21,9 @@ public class EventFactory {
     public static Event createEvent(int id, String name, String description, GeoPosition geoPosition, String type, Date eventDate) {
         return new Event(id, new Date(System.currentTimeMillis()), name, description, geoPosition, type, eventDate);
     }
+    /*
+    public static Event createEvent(Map<String, String> params) {
+        return new Event(Integer.parseInt(params.get("id")),new Date(Long.parseLong("creationDate")),params.get("name"), params.get("description"),
+                GeoPosistionFactory.createGeoPosition(params.get("geoPosition")),params.get("type"),new Date(Long.parseLong("eventDate")));
+    }*/
 }
