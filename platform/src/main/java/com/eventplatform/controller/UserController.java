@@ -6,31 +6,29 @@ import com.eventplatform.exception.container.NotFoundContainerException;
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
-import com.eventplatform.exception.utils.JsonParserException;
-import com.eventplatform.factory.UserFactory;
+import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.User;
-import com.eventplatform.util.JsonParser;
+import com.eventplatform.util.Serializer;
+import com.eventplatform.util.UtilConstants;
 import com.eventplatform.util.container.UserContainer;
 
 import java.util.List;
-import java.util.Map;
 
 public class UserController implements Controller<User> {
-    private JsonParser jsonParser;
+    private Serializer serializer;
     private UserContainer container;
 
     public UserController() {
         this.container = new UserContainer();
-        this.jsonParser = JsonParser.getJsonParser();
+        this.serializer = Serializer.getInstance();
     }
 
     @Override
-    public void create(String JSON) throws ControllerException {
+    public void create(String text, String textType) throws ControllerException {
         try {
-            Map<String, String> userParams = jsonParser.getParsedJson(JSON);
-            User user = UserFactory.createUser(userParams);
+            User user = (User) serializer.deserialize(text, UtilConstants.USER_CLAZZ, textType);
             container.addValue(user.getId(), user);
-        } catch (JsonParserException | AlreadyExistsContainerException e) {
+        } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
         }
     }

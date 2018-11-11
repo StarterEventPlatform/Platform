@@ -15,8 +15,11 @@ public class UserFactory {
         return new User(id, new Date(System.currentTimeMillis()), name, surname, login, email, password);
     }
 
-    public static User createUser(Map<String, String> params) {
-        return new User(Integer.parseInt(params.get("id")), new Date(Long.parseLong(params.get("creationDate"))), params.get("name"), params.get("surname"), params.get("login"),
-                params.get("email"), params.get("password"));
+    public static User createUser(Map<String, Object> params) {
+        return new User(Integer.parseInt(params.get("id").toString()),
+                new Date(Long.parseLong(params.get("creationDate").toString())),
+                params.get("name").toString(),
+                params.get("surname").toString(), params.get("login").toString(),
+                params.get("email").toString(), params.get("password").toString());
     }
 }

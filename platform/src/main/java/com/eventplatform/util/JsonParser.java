@@ -28,10 +28,10 @@ public class JsonParser {
      * @return Map parsedJson
      * @throws JsonParserException
      */
-    public Map<String, String> getParsedJson(String json) throws JsonParserException {
+    public Map<String, Object> getParsedJson(String json) throws JsonParserException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> map = null;
-        TypeReference<HashMap<String, String>> typeReference = new TypeReference<HashMap<String, String>>() {
+        Map<String, Object> map;
+        TypeReference<HashMap<String, Object>> typeReference = new TypeReference<HashMap<String, Object>>() {
         };
         try {
             map = mapper.readValue(json, typeReference);

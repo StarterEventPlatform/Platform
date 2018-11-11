@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 
 public class JsonParserTest extends Assert {
-    private Map<String, String> mapTest;
+    private Map<String, Object> mapTest;
     private String nameValue = "lastName";
     private String valueTest = "Tester";
     private JsonParser jsonParser;
@@ -29,7 +29,7 @@ public class JsonParserTest extends Assert {
 
     @Test
     public void returnMapFromParsed() throws JsonParserException {
-        Map<String, String> map;
+        Map<String, Object> map;
         map = jsonParser.getParsedJson(jsonTest);
         assertThat(map, is(mapTest));
     }

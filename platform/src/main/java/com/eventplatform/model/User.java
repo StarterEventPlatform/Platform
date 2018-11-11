@@ -13,6 +13,9 @@ public class User extends Entity {
     private String email;
     private String password;
 
+    public User() {
+    }
+
     public User(int id, Date creationDate) {
         super(id, creationDate);
     }

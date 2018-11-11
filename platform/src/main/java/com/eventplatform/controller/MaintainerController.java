@@ -6,22 +6,21 @@ import com.eventplatform.exception.container.NotFoundContainerException;
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
-import com.eventplatform.exception.utils.JsonParserException;
-import com.eventplatform.factory.MaintainerFactory;
+import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.Maintainer;
-import com.eventplatform.util.JsonParser;
+import com.eventplatform.util.Serializer;
+import com.eventplatform.util.UtilConstants;
 import com.eventplatform.util.container.MaintainerContainer;
 
 import java.util.List;
-import java.util.Map;
 
 public class MaintainerController implements Controller<Maintainer> {
-    private JsonParser jsonParser;
+    private Serializer serializer;
     private MaintainerContainer container;
 
     public MaintainerController() {
         this.container = new MaintainerContainer();
-        this.jsonParser = JsonParser.getJsonParser();
+        this.serializer = Serializer.getInstance();
     }
 
     @Override
@@ -52,14 +51,13 @@ public class MaintainerController implements Controller<Maintainer> {
     }
 
     @Override
-    public void create(String JSON) throws ControllerException {
-        /*try {
-            Map<String, String> maintainerParams = jsonParser.getParsedJson(JSON);
-            Maintainer maintainer = MaintainerFactory.createMaintainer(maintainerParams);
+    public void create(String text, String textType) throws ControllerException {
+        try {
+            Maintainer maintainer = (Maintainer) serializer.deserialize(text, UtilConstants.MAINTAINER_CLAZZ, textType);
             container.addValue(maintainer.getId(), maintainer);
-        } catch (JsonParserException | AlreadyExistsContainerException e) {
+        } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
-        }*/
+        }
     }
 
     @Override

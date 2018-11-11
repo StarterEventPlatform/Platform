@@ -6,6 +6,9 @@ public class Entity {
     private int id;
     private Date creationDate;
 
+    public Entity() {
+    }
+
     public Entity(int id, Date creationDate) {
         this.id = id;
         this.creationDate = creationDate;

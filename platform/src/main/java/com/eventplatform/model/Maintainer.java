@@ -10,6 +10,9 @@ public class Maintainer extends Entity {
     private List<Event> events;
     private GeoPosition geoPosition;
 
+    public Maintainer() {
+    }
+
     public Maintainer(int id, Date creationDate) {
         super(id, creationDate);
         this.events = new ArrayList<>();

@@ -15,8 +15,8 @@ public class GeoPosistionFactory {
         return new GeoPosition(id, new Date(System.currentTimeMillis()), latitude, longitude);
     }
 
-    public static GeoPosition createGeoPosition(Map<String, String> params) {
-        return new GeoPosition(Integer.parseInt(params.get("id")), new Date(Long.parseLong(params.get("creationDate"))),
-                Float.parseFloat(params.get("latitude")), Float.parseFloat(params.get("longitude")));
+    public static GeoPosition createGeoPosition(Map<String, Object> params) {
+        return new GeoPosition(Integer.parseInt(params.get("id").toString()), new Date(Long.parseLong(params.get("creationDate").toString())),
+                Float.parseFloat(params.get("latitude").toString()), Float.parseFloat(params.get("longitude").toString()));
     }
 }

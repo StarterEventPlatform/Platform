@@ -9,7 +9,7 @@ import java.util.List;
 public interface Controller<T> {
     public void create(T clazz) throws ControllerException;
 
-    public void create(String JSON) throws ControllerException;
+    public void create(String text, String textType) throws ControllerException;
 
     public T get(int id) throws NotFoundControllerException;
 

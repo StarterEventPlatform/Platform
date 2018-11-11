@@ -18,8 +18,19 @@ public class UtilConstants {
             ERROR_CREATE_DOCUMENT = "Error! Create Document",
             ERROR_TRANSFORM_STRING_TO_DOCUMENT = "Error! Can't transform String to Document";
 
-    // Markup types
+    // Serializer types
     public static final String
             JSON_TYPE = "JSON",
-            XML_TYPE = "XML";
+            XML_TYPE = "XML",
+            EVENT_CLAZZ = "EVENT",
+            GEOPOSITION_CLAZZ = "GEOPOSITION",
+            MAINTAINER_CLAZZ = "MAINTAINER",
+            USER_CLAZZ = "USER";
+
+    // Error message in serializer
+    public static final String
+            ERROR_UNKNOWN_TYPE = "Error! Can not find this type for serialization.\n" +
+            "\nHINT: Please choose type from UtilConstants :)\n" +
+            "CHOSEN_TYPE: ";
+
 }

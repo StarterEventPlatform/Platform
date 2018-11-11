@@ -8,6 +8,9 @@ public class GeoPosition extends Entity {
     private float latitude;
     private float longitude;
 
+    public GeoPosition() {
+    }
+
     public GeoPosition(int id, Date creationDate) {
         super(id, creationDate);
     }

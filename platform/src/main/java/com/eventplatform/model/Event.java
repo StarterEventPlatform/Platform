@@ -11,6 +11,9 @@ public class Event extends Entity {
     private String type;
     private Date eventDate;
 
+    public Event() {
+    }
+
     public Event(int id, Date creationDate) {
         super(id, creationDate);
     }
@@ -74,7 +77,6 @@ public class Event extends Entity {
             }
         }
     }
-
 
     public String getType() {
         return type;

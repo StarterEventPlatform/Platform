@@ -3,34 +3,50 @@ package com.eventplatform.tmp;
 import com.eventplatform.controller.Controller;
 import com.eventplatform.controller.ControllerAggregator;
 import com.eventplatform.controller.ControllerConstants;
-import com.eventplatform.factory.EventFactory;
-import com.eventplatform.factory.GeoPosistionFactory;
-import com.eventplatform.factory.MaintainerFactory;
-import com.eventplatform.factory.UserFactory;
-import com.eventplatform.model.Event;
-import com.eventplatform.model.GeoPosition;
-import com.eventplatform.model.Maintainer;
 import com.eventplatform.model.User;
 import com.eventplatform.util.JsonParser;
-import com.eventplatform.util.MarkupUtils;
 import com.eventplatform.util.PasswordEncoder;
+import com.eventplatform.util.Serializer;
 import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.container.UserContainer;
 
 import java.util.Date;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         // test md5
         // System.out.println(PasswordEncoder.getInstance().encode("test", UtilConstants.ENCODE_MD5));
-
+/*
         System.out.println("******************************MAIN***************************************");
         System.out.println("************************TEST USER_FACTORY********************************");
+        String testJson = "{\n" +
+                "  \"id\": 4,\n" +
+                "  \"creationDate\": 1541882041781,\n" +
+                "  \"user\": {\n" +
+                "    \"id\": 5,\n" +
+                "    \"creationDate\": 1541882041781,\n" +
+                "    \"name\": \"userName\",\n" +
+                "    \"surname\": \"userSurname\",\n" +
+                "    \"login\": \"userLogin\",\n" +
+                "    \"email\": \"userEmail\",\n" +
+                "    \"password\": \"221068207e125b97beb4e2d062e888b1\"\n" +
+                "  },\n" +
+                "  \"name\": \"name\",\n" +
+                "  \"description\": \"description\",\n" +
+                "  \"events\": [],\n" +
+                "  \"geoPosition\": {\n" +
+                "    \"id\": 6,\n" +
+                "    \"creationDate\": 1541882041781,\n" +
+                "    \"latitude\": 1.0,\n" +
+                "    \"longitude\": 1.0\n" +
+                "  }\n" +
+                "}";
+        System.out.println(JsonParser.getJsonParser().getParsedJson(testJson));
+*/
+
         User test1 = new User(0, new Date(System.currentTimeMillis()), "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
-        GeoPosition test4 = new GeoPosition(0, new Date(System.currentTimeMillis()), 1.0f, 1.0f);
+        /*GeoPosition test4 = new GeoPosition(0, new Date(System.currentTimeMillis()), 1.0f, 1.0f);
         Event test7 = new Event(0, new Date(System.currentTimeMillis()), "name", "description",
                 new GeoPosition(1, new Date(System.currentTimeMillis())), "type", new Date(1));
         Maintainer test12 = MaintainerFactory.createMaintainer(4, new User(5,
@@ -38,11 +54,13 @@ public class Main {
                         PasswordEncoder.getInstance().encode("userPassword", UtilConstants.ENCODE_MD5)), "name", "description",
                 new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
 
-        String str = MarkupUtils.getInstance().serialize(test12, UtilConstants.JSON_TYPE);
+        System.out.println(test12);
+        String str = Serializer.getInstance().serialize(test12, UtilConstants.JSON_TYPE);
         JsonParser jsonParser = JsonParser.getJsonParser();
         Map<String, String> testmap = jsonParser.getParsedJson(str);
         System.out.println(testmap.toString());
-        System.out.println(str);
+        System.out.println(str);*/
+
         /*User test2 = UserFactory.createUser(test1);
         test2.setId(0);
 
@@ -108,12 +126,15 @@ public class Main {
         System.out.println("**************************************************************************");
 */
         System.out.println("**********************TEST MARKUP_UTILS*****************************");
-        String json = MarkupUtils.getInstance().serialize(test1, UtilConstants.JSON_TYPE);
+        String json = Serializer.getInstance().serialize(test1, UtilConstants.JSON_TYPE);
         System.out.println("json: " + json);
-        System.out.println("xml: " + MarkupUtils.getInstance().serialize(test1, UtilConstants.XML_TYPE));
+        System.out.println("xml: " + Serializer.getInstance().serialize(test1, UtilConstants.XML_TYPE));
+        //System.out.println(Serializer.getInstance().deserialize(json, UtilConstants.USER_CLAZZ, UtilConstants.JSON_TYPE));
+
         Controller c = ControllerAggregator.getInstance().getByType(ControllerConstants.USER_TYPE);
-        c.create(json);
+        c.create(json, UtilConstants.JSON_TYPE);
         System.out.println(c.getAll());
+        System.out.println(JsonParser.getJsonParser().getParsedJson(json));
         System.out.println("**************************************************************************");
     }
 }
