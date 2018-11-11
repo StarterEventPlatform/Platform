@@ -8,25 +8,25 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.User;
-import com.eventplatform.util.Serializer;
-import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.container.UserContainer;
+import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.util.serializer.Serializer;
+import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.List;
 
 public class UserController implements Controller<User> {
     private Serializer serializer;
-    private UserContainer container;
+    private EntityContainer container;
 
     public UserController() {
-        this.container = new UserContainer();
+        this.container = new EntityContainer<User>();
         this.serializer = Serializer.getInstance();
     }
 
     @Override
     public void create(String text, String textType) throws ControllerException {
         try {
-            User user = (User) serializer.deserialize(text, UtilConstants.USER_CLAZZ, textType);
+            User user = (User) serializer.deserialize(text, SerializerConstants.USER_CLAZZ, textType);
             container.addValue(user.getId(), user);
         } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
@@ -45,7 +45,7 @@ public class UserController implements Controller<User> {
     @Override
     public User get(int id) throws NotFoundControllerException {
         try {
-            return container.getValue(id);
+            return (User) container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }

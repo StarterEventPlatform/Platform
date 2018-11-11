@@ -3,11 +3,15 @@ package com.eventplatform.tmp;
 import com.eventplatform.controller.Controller;
 import com.eventplatform.controller.ControllerAggregator;
 import com.eventplatform.controller.ControllerConstants;
+import com.eventplatform.factory.MaintainerFactory;
+import com.eventplatform.model.GeoPosition;
+import com.eventplatform.model.Maintainer;
 import com.eventplatform.model.User;
-import com.eventplatform.util.JsonParser;
 import com.eventplatform.util.PasswordEncoder;
-import com.eventplatform.util.Serializer;
 import com.eventplatform.util.UtilConstants;
+import com.eventplatform.util.parser.XmlParser;
+import com.eventplatform.util.serializer.Serializer;
+import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.Date;
 
@@ -126,15 +130,23 @@ public class Main {
         System.out.println("**************************************************************************");
 */
         System.out.println("**********************TEST MARKUP_UTILS*****************************");
-        String json = Serializer.getInstance().serialize(test1, UtilConstants.JSON_TYPE);
-        System.out.println("json: " + json);
-        System.out.println("xml: " + Serializer.getInstance().serialize(test1, UtilConstants.XML_TYPE));
-        //System.out.println(Serializer.getInstance().deserialize(json, UtilConstants.USER_CLAZZ, UtilConstants.JSON_TYPE));
+        String json = Serializer.getInstance().serialize(test1, SerializerConstants.JSON_TYPE);
+        //System.out.println("user json: " + json);
+        //System.out.println("user xml: " + Serializer.getInstance().serialize(test1, SerializerConstants.XML_TYPE));
 
-        Controller c = ControllerAggregator.getInstance().getByType(ControllerConstants.USER_TYPE);
-        c.create(json, UtilConstants.JSON_TYPE);
-        System.out.println(c.getAll());
-        System.out.println(JsonParser.getJsonParser().getParsedJson(json));
+        Controller cu = ControllerAggregator.getInstance().getByType(ControllerConstants.USER_TYPE);
+        cu.create(json, SerializerConstants.JSON_TYPE);
+
+        Maintainer test12 = MaintainerFactory.createMaintainer(4, (User) cu.get(0), "name", "descr",
+                new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
+
+        String xml = Serializer.getInstance().serialize(test12, SerializerConstants.XML_TYPE);
+        Controller mu = ControllerAggregator.getInstance().getByType(ControllerConstants.MAINTAINER_TYPE);
+        mu.create(xml, SerializerConstants.XML_TYPE);
+        //System.out.println(mu.getAll());
+
+        System.out.println("user from maint xml: " + XmlParser.getXmlParser().getParsedXml(xml).get("user"));
+        //System.out.println(JsonParser.getJsonParser().getParsedJson(json));
         System.out.println("**************************************************************************");
     }
 }

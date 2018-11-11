@@ -8,25 +8,25 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.Event;
-import com.eventplatform.util.Serializer;
-import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.container.EventContainer;
+import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.util.serializer.Serializer;
+import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.List;
 
 public class EventController implements Controller<Event> {
     private Serializer serializer;
-    private EventContainer container;
+    private EntityContainer container;
 
     public EventController() {
-        this.container = new EventContainer();
+        this.container = new EntityContainer<Event>();
         this.serializer = Serializer.getInstance();
     }
 
     @Override
     public Event get(int id) throws NotFoundControllerException {
         try {
-            return container.getValue(id);
+            return (Event) container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }
@@ -53,7 +53,7 @@ public class EventController implements Controller<Event> {
     @Override
     public void create(String text, String textType) throws ControllerException {
         try {
-            Event event = (Event) serializer.deserialize(text, UtilConstants.EVENT_CLAZZ, textType);
+            Event event = (Event) serializer.deserialize(text, SerializerConstants.EVENT_CLAZZ, textType);
             container.addValue(event.getId(), event);
         } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());

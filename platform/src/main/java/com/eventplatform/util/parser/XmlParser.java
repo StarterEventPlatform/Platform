@@ -1,4 +1,4 @@
-package com.eventplatform.util;
+package com.eventplatform.util.parser;
 
 import com.eventplatform.exception.utils.XmlParserException;
 import org.w3c.dom.*;
@@ -66,7 +66,7 @@ public class XmlParser {
             doc.getDocumentElement().normalize();
             return doc;
         } catch (Exception e) {
-            throw new XmlParserException(UtilConstants.ERROR_TRANSFORM_STRING_TO_DOCUMENT);
+            throw new XmlParserException(ParserConstants.ERROR_TRANSFORM_STRING_TO_DOCUMENT);
         }
     }
 
@@ -85,7 +85,7 @@ public class XmlParser {
             transformer.transform(source, result);
             return stringWriter.toString();
         } catch (IOException e) {
-            throw new XmlParserException(UtilConstants.ERROR_TRANSFORM_DOCUMENT_TO_STRING);
+            throw new XmlParserException(ParserConstants.ERROR_TRANSFORM_DOCUMENT_TO_STRING);
         }
     }
 
@@ -138,7 +138,7 @@ public class XmlParser {
         try {
             return getElementsByTagName(xml, tagName).item(0).getFirstChild().getNodeValue();
         } catch (NullPointerException e) {
-            throw new XmlParserException(UtilConstants.ERROR_GET_VALUE_BY_NAME);
+            throw new XmlParserException(ParserConstants.ERROR_GET_VALUE_BY_NAME);
         }
     }
 

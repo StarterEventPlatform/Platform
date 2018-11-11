@@ -1,5 +1,5 @@
 import com.eventplatform.exception.utils.XmlParserException;
-import com.eventplatform.util.XmlParser;
+import com.eventplatform.util.parser.XmlParser;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

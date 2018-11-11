@@ -8,25 +8,25 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.GeoPosition;
-import com.eventplatform.util.Serializer;
-import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.container.GeoPositionContainer;
+import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.util.serializer.Serializer;
+import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.List;
 
 public class GeoPositionController implements Controller<GeoPosition> {
     private Serializer serializer;
-    private GeoPositionContainer container;
+    private EntityContainer container;
 
     public GeoPositionController() {
-        this.container = new GeoPositionContainer();
+        this.container = new EntityContainer<GeoPosition>();
         this.serializer = Serializer.getInstance();
     }
 
     @Override
     public GeoPosition get(int id) throws NotFoundControllerException {
         try {
-            return container.getValue(id);
+            return (GeoPosition) container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }
@@ -44,7 +44,7 @@ public class GeoPositionController implements Controller<GeoPosition> {
     @Override
     public void create(String text, String textType) throws ControllerException {
         try {
-            GeoPosition geoPosition = (GeoPosition) serializer.deserialize(text, UtilConstants.GEOPOSITION_CLAZZ, textType);
+            GeoPosition geoPosition = (GeoPosition) serializer.deserialize(text, SerializerConstants.GEOPOSITION_CLAZZ, textType);
             container.addValue(geoPosition.getId(), geoPosition);
         } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());

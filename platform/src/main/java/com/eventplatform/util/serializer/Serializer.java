@@ -1,4 +1,4 @@
-package com.eventplatform.util;
+package com.eventplatform.util.serializer;
 
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.Event;
@@ -28,12 +28,12 @@ public class Serializer {
     public String serialize(Object object, String type) throws SerializerException {
         try {
             switch (type) {
-                case UtilConstants.JSON_TYPE:
+                case SerializerConstants.JSON_TYPE:
                     return jsonMapper.writeValueAsString(object);
-                case UtilConstants.XML_TYPE:
+                case SerializerConstants.XML_TYPE:
                     return xmlMapper.writeValueAsString(object);
                 default:
-                    throw new SerializerException(UtilConstants.ERROR_UNKNOWN_TYPE);
+                    throw new SerializerException(SerializerConstants.ERROR_UNKNOWN_TYPE);
             }
         } catch (IOException e) {
             throw new SerializerException(e.getMessage());
@@ -44,34 +44,34 @@ public class Serializer {
     public Object deserialize(String clazzText, String clazzType, String textType) throws SerializerException {
         try {
             switch (textType) {
-                case UtilConstants.JSON_TYPE:
+                case SerializerConstants.JSON_TYPE:
                     switch (clazzType) {
-                        case UtilConstants.USER_CLAZZ:
+                        case SerializerConstants.USER_CLAZZ:
                             return jsonMapper.readValue(clazzText, User.class);
-                        case UtilConstants.MAINTAINER_CLAZZ:
+                        case SerializerConstants.MAINTAINER_CLAZZ:
                             return jsonMapper.readValue(clazzText, Maintainer.class);
-                        case UtilConstants.GEOPOSITION_CLAZZ:
+                        case SerializerConstants.GEOPOSITION_CLAZZ:
                             return jsonMapper.readValue(clazzText, GeoPosition.class);
-                        case UtilConstants.EVENT_CLAZZ:
+                        case SerializerConstants.EVENT_CLAZZ:
                             return jsonMapper.readValue(clazzText, Event.class);
                         default:
-                            throw new SerializerException(UtilConstants.ERROR_UNKNOWN_TYPE + clazzType);
+                            throw new SerializerException(SerializerConstants.ERROR_UNKNOWN_TYPE + clazzType);
                     }
-                case UtilConstants.XML_TYPE:
+                case SerializerConstants.XML_TYPE:
                     switch (clazzType) {
-                        case UtilConstants.USER_CLAZZ:
+                        case SerializerConstants.USER_CLAZZ:
                             return xmlMapper.readValue(clazzText, User.class);
-                        case UtilConstants.MAINTAINER_CLAZZ:
+                        case SerializerConstants.MAINTAINER_CLAZZ:
                             return xmlMapper.readValue(clazzText, Maintainer.class);
-                        case UtilConstants.GEOPOSITION_CLAZZ:
+                        case SerializerConstants.GEOPOSITION_CLAZZ:
                             return xmlMapper.readValue(clazzText, GeoPosition.class);
-                        case UtilConstants.EVENT_CLAZZ:
+                        case SerializerConstants.EVENT_CLAZZ:
                             return xmlMapper.readValue(clazzText, Event.class);
                         default:
-                            throw new SerializerException(UtilConstants.ERROR_UNKNOWN_TYPE + clazzType);
+                            throw new SerializerException(SerializerConstants.ERROR_UNKNOWN_TYPE + clazzType);
                     }
                 default:
-                    throw new SerializerException(UtilConstants.ERROR_UNKNOWN_TYPE + textType);
+                    throw new SerializerException(SerializerConstants.ERROR_UNKNOWN_TYPE + textType);
             }
 
         } catch (IOException e) {

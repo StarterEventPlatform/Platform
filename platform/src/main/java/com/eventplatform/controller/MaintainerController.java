@@ -8,25 +8,25 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.model.Maintainer;
-import com.eventplatform.util.Serializer;
-import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.container.MaintainerContainer;
+import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.util.serializer.Serializer;
+import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.List;
 
 public class MaintainerController implements Controller<Maintainer> {
     private Serializer serializer;
-    private MaintainerContainer container;
+    private EntityContainer container;
 
     public MaintainerController() {
-        this.container = new MaintainerContainer();
+        this.container = new EntityContainer<Maintainer>();
         this.serializer = Serializer.getInstance();
     }
 
     @Override
     public Maintainer get(int id) throws NotFoundControllerException {
         try {
-            return container.getValue(id);
+            return (Maintainer) container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }
@@ -53,7 +53,7 @@ public class MaintainerController implements Controller<Maintainer> {
     @Override
     public void create(String text, String textType) throws ControllerException {
         try {
-            Maintainer maintainer = (Maintainer) serializer.deserialize(text, UtilConstants.MAINTAINER_CLAZZ, textType);
+            Maintainer maintainer = (Maintainer) serializer.deserialize(text, SerializerConstants.MAINTAINER_CLAZZ, textType);
             container.addValue(maintainer.getId(), maintainer);
         } catch (SerializerException | AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());

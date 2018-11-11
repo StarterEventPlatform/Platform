@@ -1,4 +1,4 @@
-package com.eventplatform.util;
+package com.eventplatform.util.parser;
 
 import com.eventplatform.exception.utils.JsonParserException;
 import org.codehaus.jackson.JsonNode;
@@ -36,7 +36,7 @@ public class JsonParser {
         try {
             map = mapper.readValue(json, typeReference);
         } catch (IOException e) {
-            throw new JsonParserException(UtilConstants.ERROR_TRANSFORM_TO_MAP);
+            throw new JsonParserException(ParserConstants.ERROR_TRANSFORM_TO_MAP);
         }
         return map;
     }
@@ -54,9 +54,9 @@ public class JsonParser {
             JsonNode jsonNode = mapper.readTree(json);
             nameValue = jsonNode.get(name).asText();
         } catch (IOException ex) {
-            throw new JsonParserException(UtilConstants.ERROR_TRANSFORM_TO_MAP);
+            throw new JsonParserException(ParserConstants.ERROR_TRANSFORM_TO_MAP);
         } catch (NullPointerException e) {
-            throw new JsonParserException(UtilConstants.ERROR_GET_VALUE_BY_NAME + " : " + name);
+            throw new JsonParserException(ParserConstants.ERROR_GET_VALUE_BY_NAME + " : " + name);
         }
         return nameValue;
     }

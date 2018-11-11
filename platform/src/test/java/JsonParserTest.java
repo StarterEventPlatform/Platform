@@ -1,5 +1,5 @@
 import com.eventplatform.exception.utils.JsonParserException;
-import com.eventplatform.util.JsonParser;
+import com.eventplatform.util.parser.JsonParser;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
