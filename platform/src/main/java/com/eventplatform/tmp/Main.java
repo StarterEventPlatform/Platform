@@ -144,9 +144,11 @@ public class Main {
                 new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
 
         String xml = Serializer.getInstance().serialize(test12, SerializerConstants.XML_TYPE);
-        Controller mu = ControllerAggregator.getInstance().getByType(ControllerConstants.MAINTAINER_TYPE);
+        Controller<Maintainer> mu = ControllerAggregator.getInstance().getByType(ControllerConstants.MAINTAINER_TYPE);
         mu.create(xml, SerializerConstants.XML_TYPE);
-        //System.out.println(mu.getAll());
+        test12 = mu.get(4);
+        System.out.println(test12.toString());
+        System.out.println(mu.getAll().toString());
 
         System.out.println("user from maint xml: " + XmlParser.getXmlParser().getParsedXml(xml).get("user"));
         //System.out.println(JsonParser.getJsonParser().getParsedJson(json));
