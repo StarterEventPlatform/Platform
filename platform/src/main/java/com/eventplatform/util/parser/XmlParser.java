@@ -35,73 +35,51 @@ public class XmlParser {
 
     /**
      * @param xmlString
-     * @return Map parsedXml
+     * @return HashMap parsedXml
      * @throws XmlParserException
      */
-    public Map<String, String> getParsedXml(String xmlString) throws XmlParserException {
-        HashMap<String, String> map;
+    public HashMap<String, Object> getParsedXml(String xmlString) throws XmlParserException {
+        HashMap<String, Object> map;
         map = new HashMap<>();
         Document xml = getDocumentFromString(xmlString);
         Node user = xml.getFirstChild();
         NodeList childs = user.getChildNodes();
-        Node child;
-        for (int i = 0; i < childs.getLength(); i++) {
-            child = childs.item(i);
-            map.put(child.getNodeName(), child.getTextContent());
-        }
+        map = getParsedMap(childs);
         return map;
     }
 
     /**
-     * @param xmlString
-     * @return Map parsedXml
-     * @throws XmlParserException
+     * @param node
+     * @return HashMap parsedMapFromNode
      */
-    public Map<String, Object> getParsedXmlObject(String xmlString) throws XmlParserException {
-        HashMap<String, Object> map;
-        map = new HashMap<>();
-        HashMap<String, Object> map1;
-        map1 = new HashMap<>();
-        Document xml = getDocumentFromString(xmlString);
-        Node user = xml.getFirstChild();
-        NodeList childs = user.getChildNodes();
-        Node child;
-        //for (int i = 0; i < childs.getLength(); i++) {
-        //child = childs.item(i);
-        //Node n = child.getFirstChild();
-        //boolean fl = n.hasChildNodes();
-        //map1.put(child.getNodeName(), child.getTextContent());
-        map = getParsedMapRecurs(childs.item(0),childs.item(0));
-        //}
-        return map;
-    }
-    // todo Maintainer events = null
-    private HashMap<String,Object> getParsedMapRecurs(Node node, Node firstNode) {
-        HashMap<String, Object> map;
-        map = new HashMap<>();
-        while (node.getNextSibling() != null) {
-            if (node.hasChildNodes()) {
-                if (node.getFirstChild().hasChildNodes())
-                    map.put(node.getNodeName(), getParsedMapRecurs(node.getFirstChild(),node.getFirstChild()));
-                else
-                    map.put(node.getNodeName(), node.getTextContent());
-            }
-            node = node.getNextSibling();
-        }
-        return map;
-    }
-
-    private HashMap<String,Object> getParsedMap(Node node) {
+    private HashMap<String, Object> getParsedMapFromNode(Node node) {
         HashMap<String, Object> map;
         map = new HashMap<>();
         if (node.hasChildNodes()) {
             if (node.getFirstChild().hasChildNodes())
-                map.put(node.getNodeName(), getParsedMap(node.getFirstChild()));
+                map.put(node.getNodeName(), getParsedMap(node.getChildNodes()));
             else
                 map.put(node.getNodeName(), node.getTextContent());
+        } else
+            map.put(node.getNodeName(), node.getTextContent());
+        return map;
+    }
+
+    /**
+     * @param nodes
+     * @return HashMap parsedMap
+     */
+    private HashMap<String, Object> getParsedMap(NodeList nodes) {
+        HashMap<String, Object> map;
+        map = new HashMap<>();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node node = nodes.item(i);
+            String str = node.getNodeName();
+            map.putAll(getParsedMapFromNode(node));
         }
         return map;
     }
+
     /**
      * @param xmlString
      * @return Document document

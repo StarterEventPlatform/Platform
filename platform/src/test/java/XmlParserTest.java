@@ -17,7 +17,7 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 
 public class XmlParserTest extends Assert {
-    private Map<String, String> mapTest;
+    private Map<String, Object> mapTest;
     private Document documentTest;
     private String nameValue = "password";
     private String testValue = "5f4dcc3b5aa765d69";
@@ -56,7 +56,7 @@ public class XmlParserTest extends Assert {
 
     @Test
     public void testGetParsedXml() throws XmlParserException {
-        Map<String, String> map;
+        Map<String, Object> map;
         map = xmlParser.getParsedXml(xml);
         assertThat(map, is(mapTest));
     }
