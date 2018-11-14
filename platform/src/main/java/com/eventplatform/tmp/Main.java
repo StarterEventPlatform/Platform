@@ -4,6 +4,7 @@ import com.eventplatform.controller.Controller;
 import com.eventplatform.controller.ControllerAggregator;
 import com.eventplatform.controller.ControllerConstants;
 import com.eventplatform.factory.MaintainerFactory;
+import com.eventplatform.model.Event;
 import com.eventplatform.model.GeoPosition;
 import com.eventplatform.model.Maintainer;
 import com.eventplatform.model.User;
@@ -14,6 +15,7 @@ import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -50,15 +52,16 @@ public class Main {
 
         User test1 = new User(0, new Date(System.currentTimeMillis()), "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
-        /*GeoPosition test4 = new GeoPosition(0, new Date(System.currentTimeMillis()), 1.0f, 1.0f);
-        Event test7 = new Event(0, new Date(System.currentTimeMillis()), "name", "description",
-                new GeoPosition(1, new Date(System.currentTimeMillis())), "type", new Date(1));
-        Maintainer test12 = MaintainerFactory.createMaintainer(4, new User(5,
+        Maintainer test11 = MaintainerFactory.createMaintainer(4, new User(5,
                         new Date(System.currentTimeMillis()), "userName", "userSurname", "userLogin", "userEmail",
                         PasswordEncoder.getInstance().encode("userPassword", UtilConstants.ENCODE_MD5)), "name", "description",
                 new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
+        XmlParser xmlParser = XmlParser.getXmlParser();
 
-        System.out.println(test12);
+        String string = Serializer.getInstance().serialize(test11, SerializerConstants.XML_TYPE);
+        Map<String,Object> map = xmlParser.getParsedXml(string);
+        System.out.println("Maintainer: " + map.toString());
+        /*System.out.println(test12);
         String str = Serializer.getInstance().serialize(test12, UtilConstants.JSON_TYPE);
         JsonParser jsonParser = JsonParser.getJsonParser();
         Map<String, String> testmap = jsonParser.getParsedJson(str);

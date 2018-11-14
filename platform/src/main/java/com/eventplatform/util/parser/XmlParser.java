@@ -40,7 +40,6 @@ public class XmlParser {
      */
     public HashMap<String, Object> getParsedXml(String xmlString) throws XmlParserException {
         HashMap<String, Object> map;
-        map = new HashMap<>();
         Document xml = getDocumentFromString(xmlString);
         Node user = xml.getFirstChild();
         NodeList childs = user.getChildNodes();
