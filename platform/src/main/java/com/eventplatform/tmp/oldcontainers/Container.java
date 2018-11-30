@@ -1,4 +1,4 @@
-package com.eventplatform.util.container;
+package com.eventplatform.tmp.oldcontainers;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;

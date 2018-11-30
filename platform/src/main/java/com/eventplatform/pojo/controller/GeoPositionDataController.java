@@ -1,4 +1,4 @@
-package com.eventplatform.controller;
+package com.eventplatform.pojo.controller;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -7,19 +7,19 @@ import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
-import com.eventplatform.model.GeoPosition;
-import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 
 import java.util.List;
 
-public class GeoPositionController implements Controller<GeoPosition> {
+public class GeoPositionDataController implements DataController<GeoPosition> {
     private Serializer serializer;
-    private EntityContainer container;
+    private PojoContainer container;
 
-    public GeoPositionController() {
-        this.container = new EntityContainer<GeoPosition>();
+    public GeoPositionDataController() {
+        this.container = new PojoContainer<GeoPosition>();
         this.serializer = Serializer.getInstance();
     }
 

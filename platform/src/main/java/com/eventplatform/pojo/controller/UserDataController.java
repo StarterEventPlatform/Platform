@@ -1,4 +1,4 @@
-package com.eventplatform.controller;
+package com.eventplatform.pojo.controller;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -7,19 +7,20 @@ import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
-import com.eventplatform.model.User;
-import com.eventplatform.util.container.EntityContainer;
+import com.eventplatform.pojo.klass.User;
+import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class UserController implements Controller<User> {
+public class UserDataController implements DataController<User> {
     private Serializer serializer;
-    private EntityContainer container;
+    private PojoContainer container;
 
-    public UserController() {
-        this.container = new EntityContainer<User>();
+    public UserDataController() {
+        this.container = new PojoContainer<User>();
         this.serializer = Serializer.getInstance();
     }
 
