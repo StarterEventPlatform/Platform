@@ -1,6 +1,6 @@
-package com.eventplatform.controller;
+package com.eventplatform.pojo.controller;
 
-public class ControllerConstants {
+public class DataControllerConstants {
 
     public static final String
             EVENT_TYPE = "EVENT",

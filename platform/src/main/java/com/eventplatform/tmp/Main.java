@@ -1,13 +1,12 @@
 package com.eventplatform.tmp;
 
-import com.eventplatform.controller.Controller;
-import com.eventplatform.controller.ControllerAggregator;
-import com.eventplatform.controller.ControllerConstants;
-import com.eventplatform.factory.MaintainerFactory;
-import com.eventplatform.model.Event;
-import com.eventplatform.model.GeoPosition;
-import com.eventplatform.model.Maintainer;
-import com.eventplatform.model.User;
+import com.eventplatform.pojo.controller.DataController;
+import com.eventplatform.pojo.controller.DataControllerAggregator;
+import com.eventplatform.pojo.controller.DataControllerConstants;
+import com.eventplatform.tmp.factory.MaintainerFactory;
+import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.pojo.klass.Maintainer;
+import com.eventplatform.pojo.klass.User;
 import com.eventplatform.util.PasswordEncoder;
 import com.eventplatform.util.UtilConstants;
 import com.eventplatform.util.parser.XmlParser;
@@ -48,7 +47,7 @@ public class Main {
                 "  }\n" +
                 "}";
         System.out.println(JsonParser.getJsonParser().getParsedJson(testJson));
-*/
+
 
         User test1 = new User(0, new Date(System.currentTimeMillis()), "name", "surname",
                 "login", "email", PasswordEncoder.getInstance().encode("password", UtilConstants.ENCODE_MD5));
@@ -131,20 +130,20 @@ public class Main {
         System.out.println("test11:" + test11);
         System.out.println("test12:" + test12);
         System.out.println("**************************************************************************");
-*/
-        System.out.println("**********************TEST MARKUP_UTILS*****************************");
+
+        //System.out.println("**********************TEST MARKUP_UTILS*****************************");
         String json = Serializer.getInstance().serialize(test1, SerializerConstants.JSON_TYPE);
         //System.out.println("user json: " + json);
         //System.out.println("user xml: " + Serializer.getInstance().serialize(test1, SerializerConstants.XML_TYPE));
 
-        Controller cu = ControllerAggregator.getInstance().getByType(ControllerConstants.USER_TYPE);
+        DataController cu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.USER_TYPE);
         cu.create(json, SerializerConstants.JSON_TYPE);
 
         Maintainer test12 = MaintainerFactory.createMaintainer(4, (User) cu.get(0), "name", "descr",
                 new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
 
         String xml = Serializer.getInstance().serialize(test12, SerializerConstants.XML_TYPE);
-        Controller<Maintainer> mu = ControllerAggregator.getInstance().getByType(ControllerConstants.MAINTAINER_TYPE);
+        DataController<Maintainer> mu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.MAINTAINER_TYPE);
         mu.create(xml, SerializerConstants.XML_TYPE);
         test12 = mu.get(4);
         System.out.println(test12.toString());
@@ -152,6 +151,6 @@ public class Main {
 
         System.out.println("user from maint xml: " + XmlParser.getXmlParser().getParsedXml(xml).get("user"));
         //System.out.println(JsonParser.getJsonParser().getParsedJson(json));
-        System.out.println("**************************************************************************");
+        System.out.println("**************************************************************************");*/
     }
 }

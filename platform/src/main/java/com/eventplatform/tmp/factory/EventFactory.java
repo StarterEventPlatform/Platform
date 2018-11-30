@@ -1,15 +1,7 @@
-package com.eventplatform.factory;
-
-import com.eventplatform.model.Event;
-import com.eventplatform.model.GeoPosition;
-import com.eventplatform.model.Maintainer;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+package com.eventplatform.tmp.factory;
 
 public class EventFactory {
-
+/*
     public static Event createEvent(Event event) {
         return new Event(event.getId(), event.getCreationDate(), event.getName(), event.getDescription(), event.getGeoPosition(), event.getMaintainers(), event.getType(), event.getEventDate());
     }

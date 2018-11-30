@@ -6,23 +6,23 @@ import com.eventplatform.exception.container.NotFoundContainerException;
 
 import java.util.*;
 
-public class EntityContainer<T> {
-    private Map<Integer, T> entities;
+public class PojoContainer<T> {
+    private Map<Integer, T> data;
 
-    public EntityContainer() {
-        entities = new HashMap<>();
+    public PojoContainer() {
+        data = new HashMap<>();
     }
 
     public void addValue(Integer key, T value) throws AlreadyExistsContainerException {
-        if (entities.get(key) == null) {
-            entities.put(key, value);
+        if (data.get(key) == null) {
+            data.put(key, value);
         } else {
             throw new AlreadyExistsContainerException();
         }
     }
 
     public T getValue(Integer key) throws NotFoundContainerException {
-        T entity = entities.get(key);
+        T entity = data.get(key);
         if (entity != null) {
             return entity;
         } else {
@@ -31,16 +31,16 @@ public class EntityContainer<T> {
     }
 
     public void remove(Integer key) throws NotFoundContainerException {
-        T entity = entities.get(key);
+        T entity = data.get(key);
         if (entity != null) {
-            entities.remove(key);
+            data.remove(key);
         } else {
             throw new NotFoundContainerException();
         }
     }
 
     public List<T> getAllValues() throws EmptyContainerException {
-        List<T> list = new ArrayList<>(entities.values());
+        List<T> list = new ArrayList<>(data.values());
         if (list.size() == 0) {
             throw new EmptyContainerException();
         }

@@ -1,12 +1,7 @@
-package com.eventplatform.factory;
-
-import com.eventplatform.model.User;
-
-import java.util.Date;
-import java.util.Map;
+package com.eventplatform.tmp.factory;
 
 public class UserFactory {
-
+/*
     public static User createUser(User user) {
         return new User(user.getId(), user.getCreationDate(), user.getName(), user.getSurname(), user.getLogin(), user.getEmail(), user.getPassword());
     }
@@ -21,5 +16,5 @@ public class UserFactory {
                 params.get("name").toString(),
                 params.get("surname").toString(), params.get("login").toString(),
                 params.get("email").toString(), params.get("password").toString());
-    }
+    }*/
 }
