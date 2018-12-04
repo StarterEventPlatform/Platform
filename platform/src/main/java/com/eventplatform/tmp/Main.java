@@ -1,21 +1,5 @@
 package com.eventplatform.tmp;
 
-import com.eventplatform.pojo.controller.DataController;
-import com.eventplatform.pojo.controller.DataControllerAggregator;
-import com.eventplatform.pojo.controller.DataControllerConstants;
-import com.eventplatform.tmp.factory.MaintainerFactory;
-import com.eventplatform.pojo.klass.GeoPosition;
-import com.eventplatform.pojo.klass.Maintainer;
-import com.eventplatform.pojo.klass.User;
-import com.eventplatform.util.PasswordEncoder;
-import com.eventplatform.util.UtilConstants;
-import com.eventplatform.util.parser.XmlParser;
-import com.eventplatform.util.serializer.Serializer;
-import com.eventplatform.util.serializer.SerializerConstants;
-
-import java.util.Date;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) throws Exception {
 

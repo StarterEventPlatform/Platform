@@ -6,8 +6,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body align="center">
-<h1>User list</h1>
-    <table class="table" width="100%" align="center">
+    {{> header}}
+    <div class="jumbotron text-center">
+        <h1>User list</h1>
+    </div>
+
+    <table class="table table-hover" width="100%" align="center">
         <thead>
             <tr>
                 <th>id</th>
@@ -17,6 +21,7 @@
                 <th>email</th>
                 <th>password</th>
                 <th>creation date</th>
+                <th>role</th>
             </tr>
         </thead>
         {{#users}}
@@ -28,9 +33,11 @@
                 <th>{{email}}</th>
                 <th>{{password}}</th>
                 <th>{{creationDate}}</th>
+                <th>{{role}}</th>
             </tr>
         {{/users}}
     </table>
+    {{> footer}}
 </body>
 
 </html>

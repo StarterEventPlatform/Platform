@@ -11,16 +11,21 @@ import com.eventplatform.pojo.klass.Maintainer;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Scope(value = "singleton")
+@Component
 public class MaintainerDataController implements DataController<Maintainer> {
+    @Autowired
     private Serializer serializer;
     private PojoContainer container;
 
     public MaintainerDataController() {
         this.container = new PojoContainer<Maintainer>();
-        this.serializer = Serializer.getInstance();
     }
 
     @Override
@@ -50,7 +55,6 @@ public class MaintainerDataController implements DataController<Maintainer> {
         }
     }
 
-    @Override
     public void create(String text, String textType) throws ControllerException {
         try {
             Maintainer maintainer = (Maintainer) serializer.deserialize(text, SerializerConstants.MAINTAINER_CLAZZ, textType);

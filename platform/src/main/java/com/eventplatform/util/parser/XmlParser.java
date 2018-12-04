@@ -1,6 +1,8 @@
 package com.eventplatform.util.parser;
 
 import com.eventplatform.exception.utils.XmlParserException;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 
@@ -15,23 +17,14 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Gleb Durygin
  */
+
+@Scope(value = "singleton")
+@Component
 public class XmlParser {
-
-    private static XmlParser xmlParser = null;
-
-    private XmlParser() {
-    }
-
-    public static XmlParser getXmlParser() {
-        if (xmlParser == null)
-            xmlParser = new XmlParser();
-        return xmlParser;
-    }
 
     /**
      * @param xmlString

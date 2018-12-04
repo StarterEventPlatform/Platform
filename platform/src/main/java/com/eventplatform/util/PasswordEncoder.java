@@ -1,22 +1,15 @@
 package com.eventplatform.util;
 
 import com.eventplatform.exception.utils.PasswordEncoderException;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@Scope(value = "singleton")
+@Component
 public class PasswordEncoder {
-
-    private static PasswordEncoder instance;
-
-    private PasswordEncoder() {
-    }
-
-    public static PasswordEncoder getInstance() {
-        if (instance == null) instance = new PasswordEncoder();
-        return instance;
-    }
-
     /**
      * @param password
      * @param encodeType

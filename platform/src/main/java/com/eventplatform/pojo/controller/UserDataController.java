@@ -6,22 +6,41 @@ import com.eventplatform.exception.container.NotFoundContainerException;
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
+import com.eventplatform.exception.utils.PasswordEncoderException;
 import com.eventplatform.exception.utils.SerializerException;
+import com.eventplatform.factory.UserFactory;
 import com.eventplatform.pojo.klass.User;
+import com.eventplatform.repository.UserDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Scope(value = "singleton")
+@Component
 public class UserDataController implements DataController<User> {
+    @Autowired
     private Serializer serializer;
+    @Autowired
+    private UserFactory userFactory;
+    private UserDataRepository userDataRepository;
     private PojoContainer container;
 
-    public UserDataController() {
+    public UserDataController(UserDataRepository userDataRepository) {
         this.container = new PojoContainer<User>();
-        this.serializer = Serializer.getInstance();
+        this.userDataRepository = userDataRepository;
+        // todo remove then
+        userDataRepository.findAll().forEach(v -> {
+            try {
+                container.addValue(v.getId(), v);
+            } catch (AlreadyExistsContainerException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -30,6 +49,16 @@ public class UserDataController implements DataController<User> {
             User user = (User) serializer.deserialize(text, SerializerConstants.USER_CLAZZ, textType);
             container.addValue(user.getId(), user);
         } catch (SerializerException | AlreadyExistsContainerException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
+    public void create(String name, String surname, String login, String email, String password) throws
+            ControllerException {
+        try {
+            User user = userFactory.createUser(name, surname, login, email, password, "default");
+            container.addValue(user.getId(), user);
+        } catch (AlreadyExistsContainerException | PasswordEncoderException e) {
             throw new ControllerException(e.getMessage());
         }
     }

@@ -11,16 +11,21 @@ import com.eventplatform.pojo.klass.Event;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Scope(value = "singleton")
+@Component
 public class EventDataController implements DataController<Event> {
+    @Autowired
     private Serializer serializer;
     private PojoContainer container;
 
     public EventDataController() {
         this.container = new PojoContainer<Event>();
-        this.serializer = Serializer.getInstance();
     }
 
     @Override
@@ -50,7 +55,6 @@ public class EventDataController implements DataController<Event> {
         }
     }
 
-    @Override
     public void create(String text, String textType) throws ControllerException {
         try {
             Event event = (Event) serializer.deserialize(text, SerializerConstants.EVENT_CLAZZ, textType);
