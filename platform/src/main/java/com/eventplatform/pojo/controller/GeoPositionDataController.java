@@ -11,16 +11,21 @@ import com.eventplatform.pojo.klass.GeoPosition;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Scope(value = "singleton")
+@Component
 public class GeoPositionDataController implements DataController<GeoPosition> {
+    @Autowired
     private Serializer serializer;
     private PojoContainer container;
 
     public GeoPositionDataController() {
         this.container = new PojoContainer<GeoPosition>();
-        this.serializer = Serializer.getInstance();
     }
 
     @Override
@@ -41,7 +46,6 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
         }
     }
 
-    @Override
     public void create(String text, String textType) throws ControllerException {
         try {
             GeoPosition geoPosition = (GeoPosition) serializer.deserialize(text, SerializerConstants.GEOPOSITION_CLAZZ, textType);

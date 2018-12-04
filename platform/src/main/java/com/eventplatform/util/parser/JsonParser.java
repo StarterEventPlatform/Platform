@@ -4,24 +4,16 @@ import com.eventplatform.exception.utils.JsonParserException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Scope(value = "singleton")
+@Component
 public class JsonParser {
-    private static JsonParser parserJson = null;
-
-    private JsonParser() {
-
-    }
-
-    public static JsonParser getJsonParser() {
-        if (parserJson == null)
-            parserJson = new JsonParser();
-        return parserJson;
-
-    }
 
     /**
      * @param json

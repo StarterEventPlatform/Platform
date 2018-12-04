@@ -7,22 +7,20 @@ import com.eventplatform.pojo.klass.Maintainer;
 import com.eventplatform.pojo.klass.User;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Scope(value = "singleton")
+@Component
 public class Serializer {
     private ObjectMapper jsonMapper;
     private XmlMapper xmlMapper;
-    private static Serializer instance;
 
-    private Serializer() {
+    public Serializer() {
         jsonMapper = new ObjectMapper();
         xmlMapper = new XmlMapper();
-    }
-
-    public static Serializer getInstance() {
-        if (instance == null) instance = new Serializer();
-        return instance;
     }
 
     public String serialize(Object object, String type) throws SerializerException {

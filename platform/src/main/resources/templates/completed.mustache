@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User created</title>
+    <title>Credentials</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body align="center">
-<h1>Credentials</h1>
+{{> header}}
+<div class="jumbotron text-center">
+    <h1>Credentials</h1>
+</div>
 <h3>
     {{#user}}
         login: {{login}}
@@ -14,5 +17,6 @@
         password: {{password}}
     {{/user}}
 </h3>
+{{> footer}}
 </body>
 </html>

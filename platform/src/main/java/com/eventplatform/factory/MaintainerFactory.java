@@ -1,5 +1,10 @@
-package com.eventplatform.tmp.factory;
+package com.eventplatform.factory;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Scope(value = "singleton")
+@Component
 public class MaintainerFactory {
 /*
     public static Maintainer createMaintainer(Maintainer maintainer) {

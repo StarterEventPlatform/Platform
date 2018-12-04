@@ -18,7 +18,7 @@ public class JsonParserTest extends Assert {
     private String jsonTest = "{\n" +
             "   \"firstName\": \"Test\",\n" +
             "   \"lastName\": \"Tester\"}";
-
+/*
     @Before
     public void init() {
         mapTest = new HashMap<>();
@@ -43,5 +43,5 @@ public class JsonParserTest extends Assert {
     @After
     public void removeMap() {
         mapTest.clear();
-    }
+    }*/
 }
