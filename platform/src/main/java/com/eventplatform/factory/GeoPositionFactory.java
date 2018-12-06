@@ -17,6 +17,7 @@ public class GeoPositionFactory {
 
     public GeoPosition createGeoPosition(float latitude, float longitude) {
         GeoPosition geoPosition = new GeoPosition();
+        geoPosition.setId((int) geoPositionDataRepository.count());
         geoPosition.setCreationDate(new Date(System.currentTimeMillis()));
         geoPosition.setLatitude(latitude);
         geoPosition.setLongitude(longitude);

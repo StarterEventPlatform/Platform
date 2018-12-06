@@ -63,8 +63,8 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
 
     public void create(float latitude, float longitude) throws ControllerException {
         try {
-            GeoPosition geoPosition = geoPositionFactory.createGeoPosition(latitude,longitude);
-            container.addValue(geoPosition.getId(),geoPosition);
+            GeoPosition geoPosition = geoPositionFactory.createGeoPosition(latitude, longitude);
+            container.addValue(geoPosition.getId(), geoPosition);
         } catch (AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
         }
