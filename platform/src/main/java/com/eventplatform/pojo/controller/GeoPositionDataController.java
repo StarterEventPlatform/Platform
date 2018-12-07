@@ -7,7 +7,9 @@ import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
+import com.eventplatform.factory.GeoPositionFactory;
 import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.repository.GeoPositionDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
@@ -22,10 +24,14 @@ import java.util.List;
 public class GeoPositionDataController implements DataController<GeoPosition> {
     @Autowired
     private Serializer serializer;
+    @Autowired
+    private GeoPositionFactory geoPositionFactory;
+    private GeoPositionDataRepository geoPositionDataRepository;
     private PojoContainer container;
 
-    public GeoPositionDataController() {
+    public GeoPositionDataController(GeoPositionDataRepository geoPositionDataRepository) {
         this.container = new PojoContainer<GeoPosition>();
+        this.geoPositionDataRepository = geoPositionDataRepository;
     }
 
     @Override
@@ -55,6 +61,15 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
         }
     }
 
+    public void create(float latitude, float longitude) throws ControllerException {
+        try {
+            GeoPosition geoPosition = geoPositionFactory.createGeoPosition(latitude, longitude);
+            container.addValue(geoPosition.getId(), geoPosition);
+        } catch (AlreadyExistsContainerException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
     @Override
     public void create(GeoPosition clazz) throws ControllerException {
         try {
@@ -65,11 +80,8 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
     }
 
     @Override
-    public List<GeoPosition> getAll() throws EmptyControllerException {
-        try {
-            return container.getAllValues();
-        } catch (EmptyContainerException e) {
-            throw new EmptyControllerException();
-        }
+    public List<GeoPosition> getAll() {
+        //return container.getAllValues();
+        return geoPositionDataRepository.findAll();
     }
 }

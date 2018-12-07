@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>GeoPosition list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body align="center">
+    {{> header}}
+    <div class="jumbotron text-center">
+        <h1>GeoPosition list</h1>
+    </div>
+    <table class="table table-hover" width="100%" align="center">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>latitude</th>
+            <th>longitude</th>
+            <th>creation date</th>
+        </tr>
+        </thead>
+        {{#geopositions}}
+            <tr class="info">
+                <th>{{id}}</th>
+                <th>{{latitude}}</th>
+                <th>{{longitude}}</th>
+                <th>{{creationDate}}</th>
+            </tr>
+        {{/geopositions}}
+    </table>
+    <tr>
+        <td colspan="5">
+            <a href="/geoposition">Add GeoPosition</a>
+        </td>
+    </tr>
+    {{> footer}}
+</body>
+
+</html>
