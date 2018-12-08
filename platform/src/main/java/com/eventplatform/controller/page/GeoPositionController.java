@@ -1,6 +1,7 @@
 package com.eventplatform.controller.page;
 
 import com.eventplatform.exception.controller.ControllerException;
+import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.pojo.controller.GeoPositionDataController;
 import com.eventplatform.pojo.klass.GeoPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class GeoPositionController {
     private GeoPositionDataController geoPositionDataController;
 
     @RequestMapping("/geopositions")
-    public String handleRequest(Model model) {
+    public String handleRequest(Model model) throws EmptyControllerException {
         model.addAttribute("geopositions", geoPositionDataController.getAll());
         return "geopositions";
     }
