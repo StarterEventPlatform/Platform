@@ -1,44 +1,34 @@
 package com.eventplatform.pojo.klass;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.eventplatform.pojo.CollectionConstants;
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
-@ToString
-@EqualsAndHashCode
+@Data
+@Document(collection = CollectionConstants.COLLECTION_NAME_MAINTAINER)
 public class Maintainer {
 
     @Id
-    @GeneratedValue
-    @Getter
-    @Setter
     private int id;
-    @Getter
-    @Setter
+    @Field(value = "Creation_Date")
     private Date creationDate;
-    @Getter
-    @Setter
+    @DBRef
+    @Field(value = "User")
     private User user;
-    @Getter
-    @Setter
+    @Field(value = "Name")
     private String name;
-    @Getter
-    @Setter
+    @Field(value = "Description")
     private String description;
-    @Getter
-    @Setter
-    private List<Event> events;
-    @Getter
-    @Setter
+    @DBRef
+    @Field(value = "GeoPosition")
     private GeoPosition geoPosition;
 
+    /*
     public void addEvent(Event event) {
         events.add(event);
     }
@@ -54,4 +44,5 @@ public class Maintainer {
             }
         }
     }
+    */
 }

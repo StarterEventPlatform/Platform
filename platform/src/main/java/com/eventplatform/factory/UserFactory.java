@@ -2,7 +2,9 @@ package com.eventplatform.factory;
 
 
 import com.eventplatform.exception.utils.PasswordEncoderException;
+import com.eventplatform.pojo.CollectionConstants;
 import com.eventplatform.pojo.klass.User;
+import com.eventplatform.repository.SequenceDao;
 import com.eventplatform.repository.UserDataRepository;
 import com.eventplatform.util.PasswordEncoder;
 import com.eventplatform.util.UtilConstants;
@@ -20,9 +22,12 @@ public class UserFactory {
     private UserDataRepository userDataRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private SequenceDao sequenceDao;
 
     public User createUser(String name, String surname, String login, String email, String password, String role) throws PasswordEncoderException {
         User user = new User();
+        user.setId(sequenceDao.getNextSequenceId(CollectionConstants.COLLECTION_NAME_USER));
         user.setCreationDate(new Date(System.currentTimeMillis()));
         user.setName(name);
         user.setLogin(login);

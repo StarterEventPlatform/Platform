@@ -27,17 +27,24 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
     @Autowired
     private GeoPositionFactory geoPositionFactory;
     private GeoPositionDataRepository geoPositionDataRepository;
-    private PojoContainer container;
+    private PojoContainer<GeoPosition> container;
 
     public GeoPositionDataController(GeoPositionDataRepository geoPositionDataRepository) {
-        this.container = new PojoContainer<GeoPosition>();
+        this.container = new PojoContainer<>();
         this.geoPositionDataRepository = geoPositionDataRepository;
+        geoPositionDataRepository.findAll().forEach(value-> {
+            try {
+                container.addValue(value.getId(),value);
+            } catch (AlreadyExistsContainerException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
     public GeoPosition get(int id) throws NotFoundControllerException {
         try {
-            return (GeoPosition) container.getValue(id);
+            return container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }
@@ -52,6 +59,7 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
         }
     }
 
+    @Override
     public void create(String text, String textType) throws ControllerException {
         try {
             GeoPosition geoPosition = (GeoPosition) serializer.deserialize(text, SerializerConstants.GEOPOSITION_CLAZZ, textType);
@@ -80,8 +88,11 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
     }
 
     @Override
-    public List<GeoPosition> getAll() {
-        //return container.getAllValues();
-        return geoPositionDataRepository.findAll();
+    public List<GeoPosition> getAll() throws EmptyControllerException {
+        try {
+            return container.getAllValues();
+        } catch (EmptyContainerException e) {
+            throw new EmptyControllerException();
+        }
     }
 }

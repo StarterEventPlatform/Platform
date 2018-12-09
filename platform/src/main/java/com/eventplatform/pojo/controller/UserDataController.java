@@ -28,10 +28,10 @@ public class UserDataController implements DataController<User> {
     @Autowired
     private UserFactory userFactory;
     private UserDataRepository userDataRepository;
-    private PojoContainer container;
+    private PojoContainer<User> container;
 
     public UserDataController(UserDataRepository userDataRepository) {
-        this.container = new PojoContainer<User>();
+        this.container = new PojoContainer<>();
         this.userDataRepository = userDataRepository;
         // todo remove then
         userDataRepository.findAll().forEach(v -> {
@@ -75,7 +75,7 @@ public class UserDataController implements DataController<User> {
     @Override
     public User get(int id) throws NotFoundControllerException {
         try {
-            return (User) container.getValue(id);
+            return container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }

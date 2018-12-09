@@ -7,7 +7,11 @@ import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
+import com.eventplatform.factory.MaintainerFactory;
+import com.eventplatform.pojo.klass.GeoPosition;
 import com.eventplatform.pojo.klass.Maintainer;
+import com.eventplatform.pojo.klass.User;
+import com.eventplatform.repository.MaintainerDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
@@ -22,16 +26,27 @@ import java.util.List;
 public class MaintainerDataController implements DataController<Maintainer> {
     @Autowired
     private Serializer serializer;
-    private PojoContainer container;
+    @Autowired
+    private MaintainerFactory maintainerFactory;
+    private MaintainerDataRepository maintainerDataRepository;
+    private PojoContainer<Maintainer> container;
 
-    public MaintainerDataController() {
-        this.container = new PojoContainer<Maintainer>();
+    public MaintainerDataController(MaintainerDataRepository maintainerDataRepository) {
+        this.container = new PojoContainer<>();
+        this.maintainerDataRepository = maintainerDataRepository;
+        maintainerDataRepository.findAll().forEach(value -> {
+            try {
+                container.addValue(value.getId(), value);
+            } catch (AlreadyExistsContainerException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
     public Maintainer get(int id) throws NotFoundControllerException {
         try {
-            return (Maintainer) container.getValue(id);
+            return container.getValue(id);
         } catch (NotFoundContainerException e) {
             throw new NotFoundControllerException();
         }
@@ -60,6 +75,15 @@ public class MaintainerDataController implements DataController<Maintainer> {
             Maintainer maintainer = (Maintainer) serializer.deserialize(text, SerializerConstants.MAINTAINER_CLAZZ, textType);
             container.addValue(maintainer.getId(), maintainer);
         } catch (SerializerException | AlreadyExistsContainerException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
+    public void create(String name, String description, User user, GeoPosition geoPosition) throws ControllerException {
+        try {
+            Maintainer maintainer = maintainerFactory.createMaintainer(name,description, user, geoPosition);
+            container.addValue(maintainer.getId(),maintainer);
+        } catch (AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
         }
     }
