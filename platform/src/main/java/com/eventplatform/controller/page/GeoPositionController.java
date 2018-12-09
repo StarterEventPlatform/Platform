@@ -13,14 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @Controller
 public class GeoPositionController {
     @Autowired
     private GeoPositionDataController geoPositionDataController;
 
     @RequestMapping("/geopositions")
-    public String handleRequest(Model model) throws EmptyControllerException {
-        model.addAttribute("geopositions", geoPositionDataController.getAll());
+    public String handleRequest(Model model) {
+        try {
+            model.addAttribute("geopositions", geoPositionDataController.getAll());
+        } catch (EmptyControllerException e) {
+            model.addAttribute("geopositions", new ArrayList<>());
+        }
         return "geopositions";
     }
 

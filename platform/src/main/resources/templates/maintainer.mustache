@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Maintainer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body align="center">
+{{> header}}
+<form method="post">
+    <div class="jumbotron text-center">
+        <h1>Create a Maintainer</h1>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name:</label>
+        <input class="form-control" id="name" placeholder="Enter Name" name="name" required>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description:</label>
+        <input class="form-control" id="description" placeholder="Enter Description"
+               name="description" required>
+    </div>
+    <div class="form-group row">
+        <label for="user" class="col-sm-2 col-form-label">User:</label>
+        <select class="form-control" id="user" name="user" required>
+            {{#users}}
+                <option value={{id}}>{{login}}</option>
+            {{/users}}
+        </select>
+    </div>
+    <div class="form-group row">
+            <label for="geoPosition" class="col-sm-2 col-form-label">GeoPosition:</label>
+            <select class="form-control" id="geoPosition" name="geoPosition" required>
+                {{#geoPositions}}
+                    <option value={{id}}>({{latitude}}; {{longitude}})</option>
+                {{/geoPositions}}
+            </select>
+    </div>
+    <button type="submit" class="btn btn-outline-secondary">Create a Maintainer</button>
+</form>
+{{>footer}}
+</body>
+
+</html>
