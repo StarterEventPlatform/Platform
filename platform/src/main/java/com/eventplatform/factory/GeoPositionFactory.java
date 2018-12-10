@@ -1,7 +1,7 @@
 package com.eventplatform.factory;
 
-import com.eventplatform.pojo.CollectionConstants;
-import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.domain.MongoMappingConstants;
+import com.eventplatform.domain.model.GeoPosition;
 import com.eventplatform.repository.GeoPositionDataRepository;
 import com.eventplatform.repository.SequenceDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class GeoPositionFactory {
 
     public GeoPosition createGeoPosition(float latitude, float longitude) {
         GeoPosition geoPosition = new GeoPosition();
-        geoPosition.setId(sequenceDao.getNextSequenceId(CollectionConstants.COLLECTION_NAME_GEOPOSITION));
+        geoPosition.setId(sequenceDao.getNextSequenceId(MongoMappingConstants.COLLECTION_NAME_GEOPOSITION));
         geoPosition.setCreationDate(new Date(System.currentTimeMillis()));
         geoPosition.setLatitude(latitude);
         geoPosition.setLongitude(longitude);

@@ -1,6 +1,6 @@
 package com.eventplatform.repository;
 
-import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.domain.model.GeoPosition;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

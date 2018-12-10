@@ -1,10 +1,10 @@
 package com.eventplatform.util.serializer;
 
 import com.eventplatform.exception.utils.SerializerException;
-import com.eventplatform.pojo.klass.Event;
-import com.eventplatform.pojo.klass.GeoPosition;
-import com.eventplatform.pojo.klass.Maintainer;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.Event;
+import com.eventplatform.domain.model.GeoPosition;
+import com.eventplatform.domain.model.Maintainer;
+import com.eventplatform.domain.model.User;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Scope;

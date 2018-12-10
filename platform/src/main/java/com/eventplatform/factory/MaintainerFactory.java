@@ -1,9 +1,9 @@
 package com.eventplatform.factory;
 
-import com.eventplatform.pojo.CollectionConstants;
-import com.eventplatform.pojo.klass.GeoPosition;
-import com.eventplatform.pojo.klass.Maintainer;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.MongoMappingConstants;
+import com.eventplatform.domain.model.GeoPosition;
+import com.eventplatform.domain.model.Maintainer;
+import com.eventplatform.domain.model.User;
 import com.eventplatform.repository.MaintainerDataRepository;
 import com.eventplatform.repository.SequenceDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class MaintainerFactory {
 
     public Maintainer createMaintainer(String name, String description, User user, GeoPosition geoPosition) {
         Maintainer maintainer = new Maintainer();
-        maintainer.setId(sequenceDao.getNextSequenceId(CollectionConstants.COLLECTION_NAME_MAINTAINER));
+        maintainer.setId(sequenceDao.getNextSequenceId(MongoMappingConstants.COLLECTION_NAME_MAINTAINER));
         maintainer.setCreationDate(new Date(System.currentTimeMillis()));
         maintainer.setName(name);
         maintainer.setDescription(description);

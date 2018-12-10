@@ -1,6 +1,6 @@
 package com.eventplatform.repository;
 
-import com.eventplatform.pojo.klass.Sequence;
+import com.eventplatform.domain.model.Sequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoOperations;

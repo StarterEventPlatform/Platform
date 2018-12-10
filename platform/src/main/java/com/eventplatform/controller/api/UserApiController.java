@@ -1,6 +1,6 @@
 package com.eventplatform.controller.api;
 
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.User;
 import com.eventplatform.repository.UserDataRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

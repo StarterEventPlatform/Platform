@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -8,22 +8,22 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.factory.MaintainerFactory;
-import com.eventplatform.pojo.klass.GeoPosition;
-import com.eventplatform.pojo.klass.Maintainer;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.GeoPosition;
+import com.eventplatform.domain.model.Maintainer;
+import com.eventplatform.domain.model.User;
 import com.eventplatform.repository.MaintainerDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Scope(value = "singleton")
-@Component
-public class MaintainerDataController implements DataController<Maintainer> {
+@Service
+public class MaintainerDataService implements DataService<Maintainer> {
     @Autowired
     private Serializer serializer;
     @Autowired
@@ -31,7 +31,7 @@ public class MaintainerDataController implements DataController<Maintainer> {
     private MaintainerDataRepository maintainerDataRepository;
     private PojoContainer<Maintainer> container;
 
-    public MaintainerDataController(MaintainerDataRepository maintainerDataRepository) {
+    public MaintainerDataService(MaintainerDataRepository maintainerDataRepository) {
         this.container = new PojoContainer<>();
         this.maintainerDataRepository = maintainerDataRepository;
         maintainerDataRepository.findAll().forEach(value -> {
@@ -81,8 +81,8 @@ public class MaintainerDataController implements DataController<Maintainer> {
 
     public void create(String name, String description, User user, GeoPosition geoPosition) throws ControllerException {
         try {
-            Maintainer maintainer = maintainerFactory.createMaintainer(name,description, user, geoPosition);
-            container.addValue(maintainer.getId(),maintainer);
+            Maintainer maintainer = maintainerFactory.createMaintainer(name, description, user, geoPosition);
+            container.addValue(maintainer.getId(), maintainer);
         } catch (AlreadyExistsContainerException e) {
             throw new ControllerException(e.getMessage());
         }

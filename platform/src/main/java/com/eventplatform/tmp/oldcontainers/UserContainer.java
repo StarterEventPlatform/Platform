@@ -3,7 +3,7 @@ package com.eventplatform.tmp.oldcontainers;
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
 import com.eventplatform.exception.container.NotFoundContainerException;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.User;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -9,20 +9,20 @@ import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.PasswordEncoderException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.factory.UserFactory;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.User;
 import com.eventplatform.repository.UserDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Scope(value = "singleton")
-@Component
-public class UserDataController implements DataController<User> {
+@Service
+public class UserDataService implements DataService<User> {
     @Autowired
     private Serializer serializer;
     @Autowired
@@ -30,7 +30,7 @@ public class UserDataController implements DataController<User> {
     private UserDataRepository userDataRepository;
     private PojoContainer<User> container;
 
-    public UserDataController(UserDataRepository userDataRepository) {
+    public UserDataService(UserDataRepository userDataRepository) {
         this.container = new PojoContainer<>();
         this.userDataRepository = userDataRepository;
         // todo remove then

@@ -1,4 +1,4 @@
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.domain.model.User;
 import junit.framework.Assert;
 
 public class UserFactoryTest extends Assert {

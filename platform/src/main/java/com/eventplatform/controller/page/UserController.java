@@ -2,8 +2,8 @@ package com.eventplatform.controller.page;
 
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.pojo.controller.UserDataController;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.service.UserDataService;
+import com.eventplatform.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +15,12 @@ import java.util.ArrayList;
 @Controller
 public class UserController {
     @Autowired
-    private UserDataController userDataController;
+    private UserDataService userDataService;
 
     @RequestMapping("/users")
     public String handleUsersRequest(Model model) {
         try {
-            model.addAttribute("users", userDataController.getAll());
+            model.addAttribute("users", userDataService.getAll());
         } catch (EmptyControllerException e) {
             model.addAttribute("users", new ArrayList<>());
         }
@@ -50,7 +50,7 @@ public class UserController {
                                @RequestParam(name = "email") String email,
                                @RequestParam(name = "password") String password) {
         try {
-            userDataController.create(name, surname, login, email, password);
+            userDataService.create(name, surname, login, email, password);
         } catch (ControllerException e) {
             e.printStackTrace();
         }

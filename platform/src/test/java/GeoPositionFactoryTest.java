@@ -1,4 +1,4 @@
-import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.domain.model.GeoPosition;
 import junit.framework.Assert;
 
 public class GeoPositionFactoryTest extends Assert {
