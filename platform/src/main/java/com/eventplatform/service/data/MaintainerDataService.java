@@ -1,11 +1,11 @@
-package com.eventplatform.service;
+package com.eventplatform.service.data;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
 import com.eventplatform.exception.container.NotFoundContainerException;
-import com.eventplatform.exception.controller.ControllerException;
-import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.exception.controller.NotFoundControllerException;
+import com.eventplatform.exception.dataservice.DataServiceException;
+import com.eventplatform.exception.dataservice.EmptyDataServiceException;
+import com.eventplatform.exception.dataservice.NotFoundDataServiceException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.factory.MaintainerFactory;
 import com.eventplatform.domain.model.GeoPosition;
@@ -44,56 +44,56 @@ public class MaintainerDataService implements DataService<Maintainer> {
     }
 
     @Override
-    public Maintainer get(int id) throws NotFoundControllerException {
+    public Maintainer get(int id) throws NotFoundDataServiceException {
         try {
             return container.getValue(id);
         } catch (NotFoundContainerException e) {
-            throw new NotFoundControllerException();
+            throw new NotFoundDataServiceException();
         }
     }
 
     @Override
-    public void remove(int id) throws NotFoundControllerException {
+    public void remove(int id) throws NotFoundDataServiceException {
         try {
             container.remove(id);
         } catch (NotFoundContainerException e) {
-            throw new NotFoundControllerException();
+            throw new NotFoundDataServiceException();
         }
     }
 
     @Override
-    public List<Maintainer> getAll() throws EmptyControllerException {
+    public List<Maintainer> getAll() throws EmptyDataServiceException {
         try {
             return container.getAllValues();
         } catch (EmptyContainerException e) {
-            throw new EmptyControllerException();
+            throw new EmptyDataServiceException();
         }
     }
 
-    public void create(String text, String textType) throws ControllerException {
+    public void create(String text, String textType) throws DataServiceException {
         try {
             Maintainer maintainer = (Maintainer) serializer.deserialize(text, SerializerConstants.MAINTAINER_CLAZZ, textType);
             container.addValue(maintainer.getId(), maintainer);
         } catch (SerializerException | AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 
-    public void create(String name, String description, User user, GeoPosition geoPosition) throws ControllerException {
+    public void create(String name, String description, User user, GeoPosition geoPosition) throws DataServiceException {
         try {
             Maintainer maintainer = maintainerFactory.createMaintainer(name, description, user, geoPosition);
             container.addValue(maintainer.getId(), maintainer);
         } catch (AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 
     @Override
-    public void create(Maintainer clazz) throws ControllerException {
+    public void create(Maintainer clazz) throws DataServiceException {
         try {
             container.addValue(clazz.getId(), clazz);
         } catch (AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 }

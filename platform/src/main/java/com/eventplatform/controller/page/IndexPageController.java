@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 @Controller
-public class IndexController {
+public class IndexPageController {
 
     private String getHexFromDate(Date date) {
         StringBuilder sb = new StringBuilder();
