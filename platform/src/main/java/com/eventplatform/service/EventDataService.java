@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -7,24 +7,24 @@ import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
-import com.eventplatform.pojo.klass.Event;
+import com.eventplatform.domain.model.Event;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Scope(value = "singleton")
-@Component
-public class EventDataController implements DataController<Event> {
+@Service
+public class EventDataService implements DataService<Event> {
     @Autowired
     private Serializer serializer;
     private PojoContainer container;
 
-    public EventDataController() {
+    public EventDataService() {
         this.container = new PojoContainer<Event>();
     }
 

@@ -2,8 +2,8 @@ package com.eventplatform.controller.page;
 
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.pojo.controller.GeoPositionDataController;
-import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.service.GeoPositionDataService;
+import com.eventplatform.domain.model.GeoPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 @Controller
 public class GeoPositionController {
     @Autowired
-    private GeoPositionDataController geoPositionDataController;
+    private GeoPositionDataService geoPositionDataService;
 
     @RequestMapping("/geopositions")
     public String handleRequest(Model model) {
         try {
-            model.addAttribute("geopositions", geoPositionDataController.getAll());
+            model.addAttribute("geopositions", geoPositionDataService.getAll());
         } catch (EmptyControllerException e) {
             model.addAttribute("geopositions", new ArrayList<>());
         }
@@ -40,7 +40,7 @@ public class GeoPositionController {
     public String geoPositionSubmit(@RequestParam(name = "latitude") float latitude,
                                     @RequestParam(name = "longitude") float longitude) {
         try {
-            geoPositionDataController.create(latitude, longitude);
+            geoPositionDataService.create(latitude, longitude);
         } catch (ControllerException e) {
             e.printStackTrace();
         }

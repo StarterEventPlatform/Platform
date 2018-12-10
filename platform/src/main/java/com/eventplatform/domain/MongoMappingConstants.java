@@ -1,6 +1,6 @@
-package com.eventplatform.pojo;
+package com.eventplatform.domain;
 
-public class CollectionConstants {
+public class MongoMappingConstants {
     public static final String
             COLLECTION_NAME_SEQUENCE = "Sequence",
             COLLECTION_NAME_USER = "User",

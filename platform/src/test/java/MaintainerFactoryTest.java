@@ -1,4 +1,4 @@
-import com.eventplatform.pojo.klass.Maintainer;
+import com.eventplatform.domain.model.Maintainer;
 import junit.framework.Assert;
 
 public class MaintainerFactoryTest extends Assert {

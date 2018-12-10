@@ -120,14 +120,14 @@ public class Main {
         //System.out.println("user json: " + json);
         //System.out.println("user xml: " + Serializer.getInstance().serialize(test1, SerializerConstants.XML_TYPE));
 
-        DataController cu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.USER_TYPE);
+        DataService cu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.USER_TYPE);
         cu.create(json, SerializerConstants.JSON_TYPE);
 
         Maintainer test12 = MaintainerFactory.createMaintainer(4, (User) cu.get(0), "name", "descr",
                 new GeoPosition(6, new Date(System.currentTimeMillis()), 1.0f, 1.0f));
 
         String xml = Serializer.getInstance().serialize(test12, SerializerConstants.XML_TYPE);
-        DataController<Maintainer> mu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.MAINTAINER_TYPE);
+        DataService<Maintainer> mu = DataControllerAggregator.getInstance().getByType(DataControllerConstants.MAINTAINER_TYPE);
         mu.create(xml, SerializerConstants.XML_TYPE);
         test12 = mu.get(4);
         System.out.println(test12.toString());

@@ -1,4 +1,4 @@
-import com.eventplatform.pojo.klass.Event;
+import com.eventplatform.domain.model.Event;
 import junit.framework.Assert;
 
 public class EventFactoryTest extends Assert {

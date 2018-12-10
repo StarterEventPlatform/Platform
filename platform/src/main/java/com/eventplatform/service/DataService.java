@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
@@ -6,7 +6,7 @@ import com.eventplatform.exception.controller.NotFoundControllerException;
 
 import java.util.List;
 
-public interface DataController<T> {
+public interface DataService<T> {
     public void create(T clazz) throws ControllerException;
 
     public void create(String text, String textType) throws ControllerException;

@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
@@ -8,20 +8,20 @@ import com.eventplatform.exception.controller.EmptyControllerException;
 import com.eventplatform.exception.controller.NotFoundControllerException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.factory.GeoPositionFactory;
-import com.eventplatform.pojo.klass.GeoPosition;
+import com.eventplatform.domain.model.GeoPosition;
 import com.eventplatform.repository.GeoPositionDataRepository;
 import com.eventplatform.util.container.PojoContainer;
 import com.eventplatform.util.serializer.Serializer;
 import com.eventplatform.util.serializer.SerializerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Scope(value = "singleton")
-@Component
-public class GeoPositionDataController implements DataController<GeoPosition> {
+@Service
+public class GeoPositionDataService implements DataService<GeoPosition> {
     @Autowired
     private Serializer serializer;
     @Autowired
@@ -29,12 +29,12 @@ public class GeoPositionDataController implements DataController<GeoPosition> {
     private GeoPositionDataRepository geoPositionDataRepository;
     private PojoContainer<GeoPosition> container;
 
-    public GeoPositionDataController(GeoPositionDataRepository geoPositionDataRepository) {
+    public GeoPositionDataService(GeoPositionDataRepository geoPositionDataRepository) {
         this.container = new PojoContainer<>();
         this.geoPositionDataRepository = geoPositionDataRepository;
-        geoPositionDataRepository.findAll().forEach(value-> {
+        geoPositionDataRepository.findAll().forEach(value -> {
             try {
-                container.addValue(value.getId(),value);
+                container.addValue(value.getId(), value);
             } catch (AlreadyExistsContainerException e) {
                 e.printStackTrace();
             }

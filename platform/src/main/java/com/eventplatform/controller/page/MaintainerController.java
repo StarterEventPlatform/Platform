@@ -2,12 +2,12 @@ package com.eventplatform.controller.page;
 
 import com.eventplatform.exception.controller.ControllerException;
 import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.pojo.controller.GeoPositionDataController;
-import com.eventplatform.pojo.controller.MaintainerDataController;
-import com.eventplatform.pojo.controller.UserDataController;
-import com.eventplatform.pojo.klass.GeoPosition;
-import com.eventplatform.pojo.klass.Maintainer;
-import com.eventplatform.pojo.klass.User;
+import com.eventplatform.service.GeoPositionDataService;
+import com.eventplatform.service.MaintainerDataService;
+import com.eventplatform.service.UserDataService;
+import com.eventplatform.domain.model.GeoPosition;
+import com.eventplatform.domain.model.Maintainer;
+import com.eventplatform.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +22,16 @@ import java.util.ArrayList;
 @Controller
 public class MaintainerController {
     @Autowired
-    private MaintainerDataController maintainerDataController;
+    private MaintainerDataService maintainerDataService;
     @Autowired
-    private UserDataController userDataController;
+    private UserDataService userDataController;
     @Autowired
-    private GeoPositionDataController geoPositionDataController;
+    private GeoPositionDataService geoPositionDataController;
 
     @RequestMapping("/maintainers")
     public String handleRequest(Model model){
         try {
-            model.addAttribute("maintainers", maintainerDataController.getAll());
+            model.addAttribute("maintainers", maintainerDataService.getAll());
         } catch (EmptyControllerException e) {
             model.addAttribute("maintainers", new ArrayList<>());
         }
@@ -56,7 +56,7 @@ public class MaintainerController {
                                    @RequestParam(name = "user") User user,
                                    @RequestParam(name = "geoPosition") GeoPosition geoPosition){
         try {
-            maintainerDataController.create(name, description, user, geoPosition);
+            maintainerDataService.create(name, description, user, geoPosition);
         } catch (ControllerException e) {
             e.printStackTrace();
         }

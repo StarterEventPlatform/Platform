@@ -1,4 +1,4 @@
-package com.eventplatform.pojo.controller;
+package com.eventplatform.service;
 
 public class DataControllerConstants {
 
