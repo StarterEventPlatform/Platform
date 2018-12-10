@@ -1,11 +1,11 @@
-package com.eventplatform.service;
+package com.eventplatform.service.data;
 
 import com.eventplatform.exception.container.AlreadyExistsContainerException;
 import com.eventplatform.exception.container.EmptyContainerException;
 import com.eventplatform.exception.container.NotFoundContainerException;
-import com.eventplatform.exception.controller.ControllerException;
-import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.exception.controller.NotFoundControllerException;
+import com.eventplatform.exception.dataservice.DataServiceException;
+import com.eventplatform.exception.dataservice.EmptyDataServiceException;
+import com.eventplatform.exception.dataservice.NotFoundDataServiceException;
 import com.eventplatform.exception.utils.SerializerException;
 import com.eventplatform.factory.GeoPositionFactory;
 import com.eventplatform.domain.model.GeoPosition;
@@ -42,57 +42,57 @@ public class GeoPositionDataService implements DataService<GeoPosition> {
     }
 
     @Override
-    public GeoPosition get(int id) throws NotFoundControllerException {
+    public GeoPosition get(int id) throws NotFoundDataServiceException {
         try {
             return container.getValue(id);
         } catch (NotFoundContainerException e) {
-            throw new NotFoundControllerException();
+            throw new NotFoundDataServiceException();
         }
     }
 
     @Override
-    public void remove(int id) throws NotFoundControllerException {
+    public void remove(int id) throws NotFoundDataServiceException {
         try {
             container.remove(id);
         } catch (NotFoundContainerException e) {
-            throw new NotFoundControllerException();
+            throw new NotFoundDataServiceException();
         }
     }
 
     @Override
-    public void create(String text, String textType) throws ControllerException {
+    public void create(String text, String textType) throws DataServiceException {
         try {
             GeoPosition geoPosition = (GeoPosition) serializer.deserialize(text, SerializerConstants.GEOPOSITION_CLAZZ, textType);
             container.addValue(geoPosition.getId(), geoPosition);
         } catch (SerializerException | AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 
-    public void create(float latitude, float longitude) throws ControllerException {
+    public void create(float latitude, float longitude) throws DataServiceException {
         try {
             GeoPosition geoPosition = geoPositionFactory.createGeoPosition(latitude, longitude);
             container.addValue(geoPosition.getId(), geoPosition);
         } catch (AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 
     @Override
-    public void create(GeoPosition clazz) throws ControllerException {
+    public void create(GeoPosition clazz) throws DataServiceException {
         try {
             container.addValue(clazz.getId(), clazz);
         } catch (AlreadyExistsContainerException e) {
-            throw new ControllerException(e.getMessage());
+            throw new DataServiceException(e.getMessage());
         }
     }
 
     @Override
-    public List<GeoPosition> getAll() throws EmptyControllerException {
+    public List<GeoPosition> getAll() throws EmptyDataServiceException {
         try {
             return container.getAllValues();
         } catch (EmptyContainerException e) {
-            throw new EmptyControllerException();
+            throw new EmptyDataServiceException();
         }
     }
 }

@@ -1,6 +1,6 @@
-package com.eventplatform.service;
+package com.eventplatform.service.data;
 
-public class DataControllerConstants {
+public class DataServiceConstants {
 
     public static final String
             EVENT_TYPE = "EVENT",

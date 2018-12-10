@@ -1,29 +1,27 @@
 package com.eventplatform.controller.page;
 
-import com.eventplatform.exception.controller.ControllerException;
-import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.service.UserDataService;
 import com.eventplatform.domain.model.User;
+import com.eventplatform.exception.dataservice.DataServiceException;
+import com.eventplatform.service.data.UserDataService;
+import com.eventplatform.service.dto.DtoServiceConstants;
+import com.eventplatform.service.dto.UserDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-
 @Controller
-public class UserController {
+public class UserPageController {
     @Autowired
     private UserDataService userDataService;
+    @Autowired
+    private UserDtoService userDtoService;
 
     @RequestMapping("/users")
     public String handleUsersRequest(Model model) {
-        try {
-            model.addAttribute("users", userDataService.getAll());
-        } catch (EmptyControllerException e) {
-            model.addAttribute("users", new ArrayList<>());
-        }
+        // todo add role
+        model.addAttribute("users", userDtoService.createDtoList(DtoServiceConstants.PRIVATE_INFO_STRATEGY));
         return "users";
     }
 
@@ -51,7 +49,7 @@ public class UserController {
                                @RequestParam(name = "password") String password) {
         try {
             userDataService.create(name, surname, login, email, password);
-        } catch (ControllerException e) {
+        } catch (DataServiceException e) {
             e.printStackTrace();
         }
         return "redirect:/users";

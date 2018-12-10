@@ -1,10 +1,10 @@
 package com.eventplatform.controller.page;
 
-import com.eventplatform.exception.controller.ControllerException;
-import com.eventplatform.exception.controller.EmptyControllerException;
-import com.eventplatform.service.GeoPositionDataService;
-import com.eventplatform.service.MaintainerDataService;
-import com.eventplatform.service.UserDataService;
+import com.eventplatform.exception.dataservice.DataServiceException;
+import com.eventplatform.exception.dataservice.EmptyDataServiceException;
+import com.eventplatform.service.data.GeoPositionDataService;
+import com.eventplatform.service.data.MaintainerDataService;
+import com.eventplatform.service.data.UserDataService;
 import com.eventplatform.domain.model.GeoPosition;
 import com.eventplatform.domain.model.Maintainer;
 import com.eventplatform.domain.model.User;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 @Controller
-public class MaintainerController {
+public class MaintainerPageController {
     @Autowired
     private MaintainerDataService maintainerDataService;
     @Autowired
@@ -32,7 +32,7 @@ public class MaintainerController {
     public String handleRequest(Model model){
         try {
             model.addAttribute("maintainers", maintainerDataService.getAll());
-        } catch (EmptyControllerException e) {
+        } catch (EmptyDataServiceException e) {
             model.addAttribute("maintainers", new ArrayList<>());
         }
         return "maintainers";
@@ -44,7 +44,7 @@ public class MaintainerController {
         try {
             model.addAttribute("users", userDataController.getAll());
             model.addAttribute("geoPositions", geoPositionDataController.getAll());
-        } catch (EmptyControllerException e) {
+        } catch (EmptyDataServiceException e) {
             e.printStackTrace();
         }
         return modelAndView;
@@ -57,7 +57,7 @@ public class MaintainerController {
                                    @RequestParam(name = "geoPosition") GeoPosition geoPosition){
         try {
             maintainerDataService.create(name, description, user, geoPosition);
-        } catch (ControllerException e) {
+        } catch (DataServiceException e) {
             e.printStackTrace();
         }
         return "redirect:/maintainers";
