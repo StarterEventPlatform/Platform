@@ -1,10 +1,9 @@
-import com.eventplatform.domain.model.User;
 import junit.framework.Assert;
 
 public class UserFactoryTest extends Assert {
-
-    private User testUser;
 /*
+    private User testUser;
+
     @Before
     public void setTestUser() {
         testUser = new User(0, new Date(1), "test", "test", "test", "test", "test");

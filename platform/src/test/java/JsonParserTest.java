@@ -1,16 +1,7 @@
-import com.eventplatform.exception.utils.JsonParserException;
-import com.eventplatform.util.parser.JsonParser;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.hamcrest.core.Is.is;
 
 public class JsonParserTest extends Assert {
+    /*
     private Map<String, Object> mapTest;
     private String nameValue = "lastName";
     private String valueTest = "Tester";
@@ -18,7 +9,7 @@ public class JsonParserTest extends Assert {
     private String jsonTest = "{\n" +
             "   \"firstName\": \"Test\",\n" +
             "   \"lastName\": \"Tester\"}";
-/*
+
     @Before
     public void init() {
         mapTest = new HashMap<>();

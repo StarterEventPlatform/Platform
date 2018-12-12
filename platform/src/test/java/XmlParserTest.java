@@ -1,22 +1,7 @@
-import com.eventplatform.exception.utils.XmlParserException;
-import com.eventplatform.util.parser.XmlParser;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.hamcrest.core.Is.is;
 
 public class XmlParserTest extends Assert {
+    /*
     private Map<String, Object> mapTest;
     private Document documentTest;
     private String nameValue = "password";
@@ -28,7 +13,7 @@ public class XmlParserTest extends Assert {
             "<name>name</name>" +
             "<password>5f4dcc3b5aa765d69</password>" +
             "</User>";
-/*
+
     @Before
     public void init() throws ParserConfigurationException {
         // mapTest

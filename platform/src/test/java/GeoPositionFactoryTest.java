@@ -1,10 +1,9 @@
-import com.eventplatform.domain.model.GeoPosition;
 import junit.framework.Assert;
 
 public class GeoPositionFactoryTest extends Assert {
-
-    private GeoPosition testGeoPosition;
 /*
+    private GeoPosition testGeoPosition;
+
     @Before
     public void setTestGeoPosition() {
         testGeoPosition = new GeoPosition(0, new Date(1), 1.0f, 1.0f);

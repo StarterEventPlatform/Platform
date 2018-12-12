@@ -1,10 +1,9 @@
-import com.eventplatform.domain.model.Event;
 import junit.framework.Assert;
 
 public class EventFactoryTest extends Assert {
-
-    private Event testEvent;
 /*
+    private Event testEvent;
+
     @Before
     public void setTestEvent() {
         testEvent = new Event(0, new Date(1), "test", "test", new GeoPosition(1, new Date(1), 1.0f, 1.0f), "test", new Date(2));
