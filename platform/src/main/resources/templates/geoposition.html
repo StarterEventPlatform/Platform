@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GeoPosition</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body th:align="center">
+<div th:include="header"></div>
+<form method="post">
+    <div class="jumbotron text-center">
+        <h1>Create a GeoPosition</h1>
+    </div>
+    <div class="form-group row">
+        <label for="latitude" class="col-sm-2 col-form-label">Latitude:</label>
+        <input type="number" step="any" class="form-control" id="latitude" placeholder="Enter latitude" name="latitude" required>
+    </div>
+    <div class="form-group row">
+        <label for="longitude" class="col-sm-2 col-form-label">Longitude:</label>
+        <input type="number" step="any" class="form-control" id="longitude" placeholder="Enter longitude" name="longitude" required>
+    </div>
+    <button type="submit" class="btn btn-outline-secondary">Create a GeoPosition</button>
+</form>
+<div th:include="footer"></div>
+</body>
+
+</html>

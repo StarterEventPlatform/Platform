@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body th:align="center">
+<div th:include="header"></div>
+<div class="jumbotron text-center">
+    <h1>Welcome to Event Platform</h1>
+</div>
+<h2>Description</h2>
+<p>
+    <br th:text="'I was called from '+${from}+':)'">
+    <br><br>
+    <b th:text="${date}"></b>
+    <br th:text="'Data Hex: '+${bgcolor}">
+</p>
+<div th:include="footer"></div>
+</body>
+
+</html>

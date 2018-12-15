@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Maintainer list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body th:align="center">
+<div th:include="header"></div>
+<div class="jumbotron text-center">
+    <h1>Maintainer list</h1>
+</div>
+<table class="table table-hover" width="100%" align="center">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>user</th>
+        <th>description</th>
+        <th>geoPosition</th>
+        <th>creation date</th>
+    </tr>
+    </thead>
+    <tr class="info" th:each="maintainer : ${maintainers}">
+        <th th:text="${maintainer.id}"></th>
+        <th th:text="${maintainer.name}"></th>
+        <th th:text="${maintainer.user.login}"></th>
+        <th th:text="${maintainer.description}"></th>
+        <th th:text="'('+${maintainer.geoPosition.latitude}+' ; '+${maintainer.geoPosition.longitude}+')'"></th>
+        <th th:text="${maintainer.creationDate}"></th>
+    </tr>
+</table>
+<p th:colspan="5">
+    <a th:href="@{/maintainer}">Add Maintainer</a>
+</p>
+<div th:include="footer"></div>
+</body>
+
+</html>

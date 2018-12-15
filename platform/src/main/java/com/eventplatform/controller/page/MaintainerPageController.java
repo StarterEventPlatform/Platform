@@ -43,7 +43,7 @@ public class MaintainerPageController {
         ModelAndView modelAndView = new ModelAndView("maintainer", "maintainer", new Maintainer());
         try {
             model.addAttribute("users", userDataController.getAll());
-            model.addAttribute("geoPositions", geoPositionDataController.getAll());
+            model.addAttribute("geopositions", geoPositionDataController.getAll());
         } catch (EmptyDataServiceException e) {
             e.printStackTrace();
         }

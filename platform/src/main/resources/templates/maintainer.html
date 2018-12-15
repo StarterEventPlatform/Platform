@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Maintainer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
-<body align="center">
-{{> header}}
+<body th:align="center">
+<div th:include="header"></div>
 <form method="post">
     <div class="jumbotron text-center">
         <h1>Create a Maintainer</h1>
@@ -23,22 +23,18 @@
     <div class="form-group row">
         <label for="user" class="col-sm-2 col-form-label">User:</label>
         <select class="form-control" id="user" name="user" required>
-            {{#users}}
-                <option value={{id}}>{{login}}</option>
-            {{/users}}
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.login}"></option>
         </select>
     </div>
     <div class="form-group row">
-            <label for="geoPosition" class="col-sm-2 col-form-label">GeoPosition:</label>
-            <select class="form-control" id="geoPosition" name="geoPosition" required>
-                {{#geoPositions}}
-                    <option value={{id}}>({{latitude}}; {{longitude}})</option>
-                {{/geoPositions}}
-            </select>
+        <label for="geoPosition" class="col-sm-2 col-form-label">GeoPosition:</label>
+        <select class="form-control" id="geoPosition" name="geoPosition" required>
+            <option th:each="geoposition : ${geopositions}" th:value="${geoposition.id}" th:text="'('+${geoposition.latitude}+'; '+${geoposition.longitude}+')'"></option>
+        </select>
     </div>
     <button type="submit" class="btn btn-outline-secondary">Create a Maintainer</button>
 </form>
-{{>footer}}
+<div th:include="footer"></div>
 </body>
 
 </html>

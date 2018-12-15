@@ -32,7 +32,7 @@ public class GeoPositionPageController {
 
     @GetMapping("/geoposition")
     public ModelAndView createGeoPosition() {
-        ModelAndView modelAndView = new ModelAndView("geoposition", "geoPosition", new GeoPosition());
+        ModelAndView modelAndView = new ModelAndView("geoposition", "geoposition", new GeoPosition());
         return modelAndView;
     }
 
