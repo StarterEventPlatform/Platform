@@ -1,9 +1,10 @@
 package com.eventplatform.domain.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.eventplatform.domain.MongoMappingConstants;
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,32 +14,39 @@ import java.util.List;
 
 @ToString
 @EqualsAndHashCode
+@Data
+@Document(collection = MongoMappingConstants.COLLECTION_NAME_EVENT)
 public class Event {
 
     @Id
-    @GeneratedValue
-    @Getter
-    @Setter
     private int id;
-    @Getter
-    @Setter
+    @Field(value = "Creation_Date")
     private Date creationDate;
-    @Getter
-    @Setter
+    @Field(value = "Name")
     private String name;
-    @Getter
-    @Setter
+    @Field(value = "Description")
     private String description;
-    @Getter
-    @Setter
+    @DBRef
+    @Field(value = "GeoPosition")
     private GeoPosition geoPosition;
+    @DBRef
+    @Field(value = "Maintainers")
     private List<Maintainer> maintainers;
-    @Getter
-    @Setter
+    @Field(value = "Type")
     private String type;
-    @Getter
-    @Setter
+    @Field(value = "Event_Date")
     private Date eventDate;
+
+    public Event(int id, Date creationDate, String name, String description, GeoPosition geoPosition, Maintainer maintainers, String type, Date eventDate) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.name = name;
+        this.description = description;
+        this.geoPosition = geoPosition;
+        addMaintainer(maintainers);
+        this.type = type;
+        this.eventDate = eventDate;
+    }
 
     public List<Maintainer> getMaintainers() {
         return Collections.unmodifiableList(maintainers);

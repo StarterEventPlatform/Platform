@@ -13,7 +13,7 @@
         <ul class="nav navbar-nav">
             <li th:class="${#request.requestURI} == '/' ? 'active':''"><a th:href="@{/}">Home</a></li>
             <li th:class="${#request.requestURI} == '/users' ? 'active':''"><a th:href="@{/users}">Users</a></li>
-            <li th:class="${#request.requestURI} == '/#' ? 'active':''"><a th:href="@{#}">Events</a></li>
+            <li th:class="${#request.requestURI} == '/events' ? 'active':''"><a th:href="@{/events}">Events</a></li>
             <li th:class="${#request.requestURI} == '/geopositions' ? 'active':''"><a th:href="@{/geopositions}">Geopositions</a></li>
             <li th:class="${#request.requestURI} == '/maintainers' ? 'active':''"><a th:href="@{/maintainers}">Maintainers</a></li>
             <li th:class="${#request.requestURI} == '/yandexmap' ? 'active':''"><a th:href="@{/yandexmap}">Yandex Map</a></li>
